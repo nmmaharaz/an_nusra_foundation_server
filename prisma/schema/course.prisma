@@ -1,0 +1,79 @@
+model Course {
+    id          String  @id @default(uuid())
+    title       String
+    description String?
+    trainerId   String
+    price       Float?
+    duration    Int?
+
+    trainer          Trainer  @relation(fields: [trainerId], references: [id])
+    lessons          Lesson[]
+    enrollments      Enrollment[]
+    reviews          CourseReview[]
+    courseCategory   CourseCategory? @relation(fields: [courseCategoryId], references: [id])
+    courseCategoryId String?
+    certificates     Certificate[]
+}
+
+model CourseCategory {
+    id      String   @id @default(uuid())
+    name    String
+    courses Course[]
+}
+
+model Lesson {
+    id       String  @id @default(uuid())
+    courseId String
+    title    String
+    videoUrl String?
+    content  String?
+
+    course   Course           @relation(fields: [courseId], references: [id])
+    progress LessonProgress[]
+}
+
+model Enrollment {
+    id         String   @id @default(uuid())
+    userId     String
+    courseId   String
+    status     String   @default("active")
+    progress   Int      @default(0)
+    enrolledAt DateTime @default(now())
+
+    user   User   @relation(fields: [userId], references: [id])
+    course Course @relation(fields: [courseId], references: [id])
+}
+
+model LessonProgress {
+    id          String    @id @default(uuid())
+    userId      String
+    lessonId    String
+    completed   Boolean   @default(false)
+    completedAt DateTime?
+
+    user   User   @relation(fields: [userId], references: [id])
+    lesson Lesson @relation(fields: [lessonId], references: [id])
+}
+
+model Certificate {
+    id             String   @id @default(uuid())
+    userId         String
+    courseId       String
+    certificateUrl String
+    issuedAt       DateTime @default(now())
+
+    user   User   @relation(fields: [userId], references: [id])
+    course Course @relation(fields: [courseId], references: [id])
+}
+
+model CourseReview {
+    id        String   @id @default(uuid())
+    userId    String
+    courseId  String
+    rating    Int
+    comment   String?
+    createdAt DateTime @default(now())
+
+    user   User   @relation(fields: [userId], references: [id])
+    course Course @relation(fields: [courseId], references: [id])
+}

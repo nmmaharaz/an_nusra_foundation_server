@@ -1,0 +1,43 @@
+model Campaign {
+    id           String    @id @default(uuid())
+    title        String
+    description  String?
+    goalAmount   Float
+    raisedAmount Float     @default(0)
+    startDate    DateTime
+    endDate      DateTime?
+    categoryId   String?
+
+    donations          Donation[]
+    recurringDonations RecurringDonation[]
+    updates            CampaignUpdate[]
+    media              CampaignMedia[]
+    campaignCategory   CampaignCategory?   @relation(fields: [campaignCategoryId], references: [id])
+    campaignCategoryId String?
+    impactReports      ImpactReport[]
+}
+
+model CampaignCategory {
+    id        String     @id @default(uuid())
+    name      String
+    campaigns Campaign[]
+}
+
+model CampaignUpdate {
+    id         String   @id @default(uuid())
+    campaignId String
+    title      String
+    content    String
+    createdAt  DateTime @default(now())
+
+    campaign Campaign @relation(fields: [campaignId], references: [id])
+}
+
+model CampaignMedia {
+    id         String @id @default(uuid())
+    campaignId String
+    fileUrl    String
+    type       String
+
+    campaign Campaign @relation(fields: [campaignId], references: [id])
+}

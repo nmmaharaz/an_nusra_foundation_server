@@ -1,0 +1,66 @@
+model Event {
+    id          String   @id @default(uuid())
+    title       String
+    description String?
+    location    String?
+    eventDate   DateTime
+
+    registrations EventRegistration[]
+    volunteers    EventVolunteer[]
+}
+
+model EventRegistration {
+    id      String @id @default(uuid())
+    userId  String
+    eventId String
+
+    user  User  @relation(fields: [userId], references: [id])
+    event Event @relation(fields: [eventId], references: [id])
+}
+
+model EventVolunteer {
+    id          String @id @default(uuid())
+    eventId     String
+    volunteerId String
+
+    event     Event     @relation(fields: [eventId], references: [id])
+    volunteer Volunteer @relation(fields: [volunteerId], references: [id])
+}
+
+model Post {
+    id        String   @id @default(uuid())
+    title     String
+    content   String
+    authorId  String
+    createdAt DateTime @default(now())
+
+    author User @relation(fields: [authorId], references: [id])
+}
+
+model Notification {
+    id        String   @id @default(uuid())
+    title     String
+    message   String
+    createdAt DateTime @default(now())
+
+    users UserNotification[]
+}
+
+model MediaFile {
+    id         String   @id @default(uuid())
+    url        String
+    type       String
+    uploadedBy String
+    createdAt  DateTime @default(now())
+
+    user User @relation(fields: [uploadedBy], references: [id])
+}
+
+model Session {
+    id        String   @id @default(uuid())
+    userId    String
+    token     String
+    expiresAt DateTime
+
+    user User @relation(fields: [userId], references: [id])
+}

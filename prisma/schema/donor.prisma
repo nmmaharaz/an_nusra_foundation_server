@@ -1,0 +1,53 @@
+model Donation {
+    id          String   @id @default(uuid())
+    userId      String
+    campaignId  String?
+    amount      Float
+    status      String   @default("pending")
+    isRecurring Boolean  @default(false)
+    recurringId String?
+    createdAt   DateTime @default(now())
+
+    user        User               @relation(fields: [userId], references: [id])
+    campaign    Campaign?          @relation(fields: [campaignId], references: [id])
+    recurring   RecurringDonation? @relation(fields: [recurringId], references: [id])
+    transaction Transaction[]
+}
+
+model RecurringDonation {
+    id              String   @id @default(uuid())
+    userId          String
+    campaignId      String?
+    amount          Float
+    interval        String   @default("monthly")
+    nextPaymentDate DateTime
+    status          String   @default("active")
+    createdAt       DateTime @default(now())
+
+    user      User       @relation(fields: [userId], references: [id])
+    campaign  Campaign?  @relation(fields: [campaignId], references: [id])
+    donations Donation[]
+}
+
+model Transaction {
+    id            String   @id @default(uuid())
+    donationId    String
+    gateway       String
+    transactionId String
+    status        String
+    createdAt     DateTime @default(now())
+
+    donation Donation @relation(fields: [donationId], references: [id])
+}
+
+model ImpactReport {
+    id          String   @id @default(uuid())
+    campaignId  String
+    donorId     String
+    description String
+    reportDate  DateTime
+    createdBy   String
+
+    campaign Campaign @relation(fields: [campaignId], references: [id])
+    donor    User     @relation(fields: [donorId], references: [id])
+}

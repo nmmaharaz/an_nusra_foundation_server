@@ -1,0 +1,60 @@
+model User {
+    id        String   @id @default(uuid())
+    name      String
+    email     String   @unique
+    password  String
+    phone     String?
+    status    String   @default("active")
+    createdAt DateTime @default(now())
+
+    roles                 UserRole[]
+    donations             Donation[]
+    recurringDonations    RecurringDonation[]
+    enrollments           Enrollment[]
+    lessonProgress        LessonProgress[]
+    certificates          Certificate[]
+    volunteer             Volunteer?
+    trainer               Trainer?
+    posts                 Post[]
+    notifications         UserNotification[]
+    auditLogs             AuditLog[]
+    memberProfile         MemberProfile?
+    impactReports         ImpactReport[]
+    courseReviews         CourseReview[]
+    volunteerApplications VolunteerApplication[]
+    eventRegistrations    EventRegistration[]
+    mediaFiles            MediaFile[]
+    sessions              Session[]
+}
+
+model MemberProfile {
+    id         String   @id @default(uuid())
+    userId     String   @unique
+    address    String?
+    occupation String?
+    joinedDate DateTime @default(now())
+
+    user User @relation(fields: [userId], references: [id])
+}
+
+model UserNotification {
+    id             String  @id @default(uuid())
+    userId         String
+    notificationId String
+    read           Boolean @default(false)
+
+    user         User         @relation(fields: [userId], references: [id])
+    notification Notification @relation(fields: [notificationId], references: [id])
+}
+
+model AuditLog {
+    id         String   @id @default(uuid())
+    userId     String
+    action     String
+    entityType String
+    entityId   String?
+    createdAt  DateTime @default(now())
+
+    user User @relation(fields: [userId], references: [id])
+}
+

@@ -1,0 +1,9 @@
+model Trainer {
+    id         String  @id @default(uuid())
+    userId     String  @unique
+    expertise  String?
+    experience Int?
+
+    user    User     @relation(fields: [userId], references: [id])
+    courses Course[]
+}

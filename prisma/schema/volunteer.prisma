@@ -1,0 +1,50 @@
+model Volunteer {
+    id     String  @id @default(uuid())
+    userId String  @unique
+    skills String?
+    status String  @default("pending")
+
+    user            User                   @relation(fields: [userId], references: [id])
+    tasks           TaskAssignment[]
+    activityLogs    VolunteerActivityLog[]
+    eventVolunteers EventVolunteer[]
+}
+
+
+model VolunteerApplication {
+    id        String   @id @default(uuid())
+    userId    String
+    reason    String
+    status    String   @default("pending")
+    appliedAt DateTime @default(now())
+
+    user User @relation(fields: [userId], references: [id])
+}
+
+model VolunteerTask {
+    id          String    @id @default(uuid())
+    title       String
+    description String?
+    deadline    DateTime?
+
+    assignments TaskAssignment[]
+}
+
+model TaskAssignment {
+    id          String @id @default(uuid())
+    taskId      String
+    volunteerId String
+    status      String @default("assigned")
+
+    task      VolunteerTask    @relation(fields: [taskId], references: [id])
+    volunteer Volunteer @relation(fields: [volunteerId], references: [id])
+}
+
+model VolunteerActivityLog {
+    id          String   @id @default(uuid())
+    volunteerId String
+    activity    String
+    date        DateTime @default(now())
+
+    volunteer Volunteer @relation(fields: [volunteerId], references: [id])
+}
