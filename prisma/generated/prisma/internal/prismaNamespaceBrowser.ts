@@ -62,6 +62,7 @@ export const ModelName = {
   LessonProgress: 'LessonProgress',
   Certificate: 'Certificate',
   CourseReview: 'CourseReview',
+  Donor: 'Donor',
   Donation: 'Donation',
   RecurringDonation: 'RecurringDonation',
   Transaction: 'Transaction',
@@ -79,7 +80,7 @@ export const ModelName = {
   RolePermission: 'RolePermission',
   Trainer: 'Trainer',
   User: 'User',
-  MemberProfile: 'MemberProfile',
+  Member: 'Member',
   UserNotification: 'UserNotification',
   AuditLog: 'AuditLog',
   Volunteer: 'Volunteer',
@@ -206,7 +207,7 @@ export type LessonProgressScalarFieldEnum = (typeof LessonProgressScalarFieldEnu
 
 export const CertificateScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
+  enrollmentId: 'enrollmentId',
   courseId: 'courseId',
   certificateUrl: 'certificateUrl',
   issuedAt: 'issuedAt'
@@ -217,7 +218,7 @@ export type CertificateScalarFieldEnum = (typeof CertificateScalarFieldEnum)[key
 
 export const CourseReviewScalarFieldEnum = {
   id: 'id',
-  userId: 'userId',
+  enrollmentId: 'enrollmentId',
   courseId: 'courseId',
   rating: 'rating',
   comment: 'comment',
@@ -227,9 +228,18 @@ export const CourseReviewScalarFieldEnum = {
 export type CourseReviewScalarFieldEnum = (typeof CourseReviewScalarFieldEnum)[keyof typeof CourseReviewScalarFieldEnum]
 
 
-export const DonationScalarFieldEnum = {
+export const DonorScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
+  createdAt: 'createdAt'
+} as const
+
+export type DonorScalarFieldEnum = (typeof DonorScalarFieldEnum)[keyof typeof DonorScalarFieldEnum]
+
+
+export const DonationScalarFieldEnum = {
+  id: 'id',
+  donorId: 'donorId',
   campaignId: 'campaignId',
   amount: 'amount',
   status: 'status',
@@ -401,13 +411,14 @@ export const UserScalarFieldEnum = {
   password: 'password',
   phone: 'phone',
   status: 'status',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  isVerification: 'isVerification'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
-export const MemberProfileScalarFieldEnum = {
+export const MemberScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   address: 'address',
@@ -415,7 +426,7 @@ export const MemberProfileScalarFieldEnum = {
   joinedDate: 'joinedDate'
 } as const
 
-export type MemberProfileScalarFieldEnum = (typeof MemberProfileScalarFieldEnum)[keyof typeof MemberProfileScalarFieldEnum]
+export type MemberScalarFieldEnum = (typeof MemberScalarFieldEnum)[keyof typeof MemberScalarFieldEnum]
 
 
 export const UserNotificationScalarFieldEnum = {

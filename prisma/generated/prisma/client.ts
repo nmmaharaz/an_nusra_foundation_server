@@ -97,6 +97,11 @@ export type Certificate = Prisma.CertificateModel
  */
 export type CourseReview = Prisma.CourseReviewModel
 /**
+ * Model Donor
+ * 
+ */
+export type Donor = Prisma.DonorModel
+/**
  * Model Donation
  * 
  */
@@ -182,10 +187,10 @@ export type Trainer = Prisma.TrainerModel
  */
 export type User = Prisma.UserModel
 /**
- * Model MemberProfile
+ * Model Member
  * 
  */
-export type MemberProfile = Prisma.MemberProfileModel
+export type Member = Prisma.MemberModel
 /**
  * Model UserNotification
  * 

@@ -6,7 +6,7 @@ model Course {
     price       Float?
     duration    Int?
 
-    trainer          Trainer  @relation(fields: [trainerId], references: [id])
+    trainer          Trainer         @relation(fields: [trainerId], references: [id])
     lessons          Lesson[]
     enrollments      Enrollment[]
     reviews          CourseReview[]
@@ -40,8 +40,10 @@ model Enrollment {
     progress   Int      @default(0)
     enrolledAt DateTime @default(now())
 
-    user   User   @relation(fields: [userId], references: [id])
-    course Course @relation(fields: [courseId], references: [id])
+    user         User          @relation(fields: [userId], references: [id])
+    course       Course        @relation(fields: [courseId], references: [id])
+    certificates Certificate? // Relation to Certificate => user to certificate
+    courseReview CourseReview? // Relation to CourseReview => user to course review
 }
 
 model LessonProgress {
@@ -57,23 +59,23 @@ model LessonProgress {
 
 model Certificate {
     id             String   @id @default(uuid())
-    userId         String
+    enrollmentId   String   @unique
     courseId       String
     certificateUrl String
     issuedAt       DateTime @default(now())
 
-    user   User   @relation(fields: [userId], references: [id])
-    course Course @relation(fields: [courseId], references: [id])
+    user   Enrollment @relation(fields: [enrollmentId], references: [id])
+    course Course     @relation(fields: [courseId], references: [id])
 }
 
 model CourseReview {
-    id        String   @id @default(uuid())
-    userId    String
-    courseId  String
-    rating    Int
-    comment   String?
-    createdAt DateTime @default(now())
+    id           String   @id @default(uuid())
+    enrollmentId String   @unique
+    courseId     String
+    rating       Int
+    comment      String?
+    createdAt    DateTime @default(now())
 
-    user   User   @relation(fields: [userId], references: [id])
-    course Course @relation(fields: [courseId], references: [id])
+    enrollment Enrollment @relation(fields: [enrollmentId], references: [id])
+    course     Course     @relation(fields: [courseId], references: [id])
 }

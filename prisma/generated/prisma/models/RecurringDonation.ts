@@ -240,7 +240,7 @@ export type RecurringDonationWhereInput = {
   nextPaymentDate?: Prisma.DateTimeFilter<"RecurringDonation"> | Date | string
   status?: Prisma.StringFilter<"RecurringDonation"> | string
   createdAt?: Prisma.DateTimeFilter<"RecurringDonation"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  donor?: Prisma.XOR<Prisma.DonorScalarRelationFilter, Prisma.DonorWhereInput>
   campaign?: Prisma.XOR<Prisma.CampaignNullableScalarRelationFilter, Prisma.CampaignWhereInput> | null
   donations?: Prisma.DonationListRelationFilter
 }
@@ -254,7 +254,7 @@ export type RecurringDonationOrderByWithRelationInput = {
   nextPaymentDate?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  user?: Prisma.UserOrderByWithRelationInput
+  donor?: Prisma.DonorOrderByWithRelationInput
   campaign?: Prisma.CampaignOrderByWithRelationInput
   donations?: Prisma.DonationOrderByRelationAggregateInput
 }
@@ -271,7 +271,7 @@ export type RecurringDonationWhereUniqueInput = Prisma.AtLeast<{
   nextPaymentDate?: Prisma.DateTimeFilter<"RecurringDonation"> | Date | string
   status?: Prisma.StringFilter<"RecurringDonation"> | string
   createdAt?: Prisma.DateTimeFilter<"RecurringDonation"> | Date | string
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  donor?: Prisma.XOR<Prisma.DonorScalarRelationFilter, Prisma.DonorWhereInput>
   campaign?: Prisma.XOR<Prisma.CampaignNullableScalarRelationFilter, Prisma.CampaignWhereInput> | null
   donations?: Prisma.DonationListRelationFilter
 }, "id">
@@ -313,7 +313,7 @@ export type RecurringDonationCreateInput = {
   nextPaymentDate: Date | string
   status?: string
   createdAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutRecurringDonationsInput
+  donor: Prisma.DonorCreateNestedOneWithoutRecurringDonationsInput
   campaign?: Prisma.CampaignCreateNestedOneWithoutRecurringDonationsInput
   donations?: Prisma.DonationCreateNestedManyWithoutRecurringInput
 }
@@ -337,7 +337,7 @@ export type RecurringDonationUpdateInput = {
   nextPaymentDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutRecurringDonationsNestedInput
+  donor?: Prisma.DonorUpdateOneRequiredWithoutRecurringDonationsNestedInput
   campaign?: Prisma.CampaignUpdateOneWithoutRecurringDonationsNestedInput
   donations?: Prisma.DonationUpdateManyWithoutRecurringNestedInput
 }
@@ -483,6 +483,48 @@ export type RecurringDonationUncheckedUpdateManyWithoutCampaignNestedInput = {
   deleteMany?: Prisma.RecurringDonationScalarWhereInput | Prisma.RecurringDonationScalarWhereInput[]
 }
 
+export type RecurringDonationCreateNestedManyWithoutDonorInput = {
+  create?: Prisma.XOR<Prisma.RecurringDonationCreateWithoutDonorInput, Prisma.RecurringDonationUncheckedCreateWithoutDonorInput> | Prisma.RecurringDonationCreateWithoutDonorInput[] | Prisma.RecurringDonationUncheckedCreateWithoutDonorInput[]
+  connectOrCreate?: Prisma.RecurringDonationCreateOrConnectWithoutDonorInput | Prisma.RecurringDonationCreateOrConnectWithoutDonorInput[]
+  createMany?: Prisma.RecurringDonationCreateManyDonorInputEnvelope
+  connect?: Prisma.RecurringDonationWhereUniqueInput | Prisma.RecurringDonationWhereUniqueInput[]
+}
+
+export type RecurringDonationUncheckedCreateNestedManyWithoutDonorInput = {
+  create?: Prisma.XOR<Prisma.RecurringDonationCreateWithoutDonorInput, Prisma.RecurringDonationUncheckedCreateWithoutDonorInput> | Prisma.RecurringDonationCreateWithoutDonorInput[] | Prisma.RecurringDonationUncheckedCreateWithoutDonorInput[]
+  connectOrCreate?: Prisma.RecurringDonationCreateOrConnectWithoutDonorInput | Prisma.RecurringDonationCreateOrConnectWithoutDonorInput[]
+  createMany?: Prisma.RecurringDonationCreateManyDonorInputEnvelope
+  connect?: Prisma.RecurringDonationWhereUniqueInput | Prisma.RecurringDonationWhereUniqueInput[]
+}
+
+export type RecurringDonationUpdateManyWithoutDonorNestedInput = {
+  create?: Prisma.XOR<Prisma.RecurringDonationCreateWithoutDonorInput, Prisma.RecurringDonationUncheckedCreateWithoutDonorInput> | Prisma.RecurringDonationCreateWithoutDonorInput[] | Prisma.RecurringDonationUncheckedCreateWithoutDonorInput[]
+  connectOrCreate?: Prisma.RecurringDonationCreateOrConnectWithoutDonorInput | Prisma.RecurringDonationCreateOrConnectWithoutDonorInput[]
+  upsert?: Prisma.RecurringDonationUpsertWithWhereUniqueWithoutDonorInput | Prisma.RecurringDonationUpsertWithWhereUniqueWithoutDonorInput[]
+  createMany?: Prisma.RecurringDonationCreateManyDonorInputEnvelope
+  set?: Prisma.RecurringDonationWhereUniqueInput | Prisma.RecurringDonationWhereUniqueInput[]
+  disconnect?: Prisma.RecurringDonationWhereUniqueInput | Prisma.RecurringDonationWhereUniqueInput[]
+  delete?: Prisma.RecurringDonationWhereUniqueInput | Prisma.RecurringDonationWhereUniqueInput[]
+  connect?: Prisma.RecurringDonationWhereUniqueInput | Prisma.RecurringDonationWhereUniqueInput[]
+  update?: Prisma.RecurringDonationUpdateWithWhereUniqueWithoutDonorInput | Prisma.RecurringDonationUpdateWithWhereUniqueWithoutDonorInput[]
+  updateMany?: Prisma.RecurringDonationUpdateManyWithWhereWithoutDonorInput | Prisma.RecurringDonationUpdateManyWithWhereWithoutDonorInput[]
+  deleteMany?: Prisma.RecurringDonationScalarWhereInput | Prisma.RecurringDonationScalarWhereInput[]
+}
+
+export type RecurringDonationUncheckedUpdateManyWithoutDonorNestedInput = {
+  create?: Prisma.XOR<Prisma.RecurringDonationCreateWithoutDonorInput, Prisma.RecurringDonationUncheckedCreateWithoutDonorInput> | Prisma.RecurringDonationCreateWithoutDonorInput[] | Prisma.RecurringDonationUncheckedCreateWithoutDonorInput[]
+  connectOrCreate?: Prisma.RecurringDonationCreateOrConnectWithoutDonorInput | Prisma.RecurringDonationCreateOrConnectWithoutDonorInput[]
+  upsert?: Prisma.RecurringDonationUpsertWithWhereUniqueWithoutDonorInput | Prisma.RecurringDonationUpsertWithWhereUniqueWithoutDonorInput[]
+  createMany?: Prisma.RecurringDonationCreateManyDonorInputEnvelope
+  set?: Prisma.RecurringDonationWhereUniqueInput | Prisma.RecurringDonationWhereUniqueInput[]
+  disconnect?: Prisma.RecurringDonationWhereUniqueInput | Prisma.RecurringDonationWhereUniqueInput[]
+  delete?: Prisma.RecurringDonationWhereUniqueInput | Prisma.RecurringDonationWhereUniqueInput[]
+  connect?: Prisma.RecurringDonationWhereUniqueInput | Prisma.RecurringDonationWhereUniqueInput[]
+  update?: Prisma.RecurringDonationUpdateWithWhereUniqueWithoutDonorInput | Prisma.RecurringDonationUpdateWithWhereUniqueWithoutDonorInput[]
+  updateMany?: Prisma.RecurringDonationUpdateManyWithWhereWithoutDonorInput | Prisma.RecurringDonationUpdateManyWithWhereWithoutDonorInput[]
+  deleteMany?: Prisma.RecurringDonationScalarWhereInput | Prisma.RecurringDonationScalarWhereInput[]
+}
+
 export type RecurringDonationCreateNestedOneWithoutDonationsInput = {
   create?: Prisma.XOR<Prisma.RecurringDonationCreateWithoutDonationsInput, Prisma.RecurringDonationUncheckedCreateWithoutDonationsInput>
   connectOrCreate?: Prisma.RecurringDonationCreateOrConnectWithoutDonationsInput
@@ -499,48 +541,6 @@ export type RecurringDonationUpdateOneWithoutDonationsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.RecurringDonationUpdateToOneWithWhereWithoutDonationsInput, Prisma.RecurringDonationUpdateWithoutDonationsInput>, Prisma.RecurringDonationUncheckedUpdateWithoutDonationsInput>
 }
 
-export type RecurringDonationCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.RecurringDonationCreateWithoutUserInput, Prisma.RecurringDonationUncheckedCreateWithoutUserInput> | Prisma.RecurringDonationCreateWithoutUserInput[] | Prisma.RecurringDonationUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.RecurringDonationCreateOrConnectWithoutUserInput | Prisma.RecurringDonationCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.RecurringDonationCreateManyUserInputEnvelope
-  connect?: Prisma.RecurringDonationWhereUniqueInput | Prisma.RecurringDonationWhereUniqueInput[]
-}
-
-export type RecurringDonationUncheckedCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.RecurringDonationCreateWithoutUserInput, Prisma.RecurringDonationUncheckedCreateWithoutUserInput> | Prisma.RecurringDonationCreateWithoutUserInput[] | Prisma.RecurringDonationUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.RecurringDonationCreateOrConnectWithoutUserInput | Prisma.RecurringDonationCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.RecurringDonationCreateManyUserInputEnvelope
-  connect?: Prisma.RecurringDonationWhereUniqueInput | Prisma.RecurringDonationWhereUniqueInput[]
-}
-
-export type RecurringDonationUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.RecurringDonationCreateWithoutUserInput, Prisma.RecurringDonationUncheckedCreateWithoutUserInput> | Prisma.RecurringDonationCreateWithoutUserInput[] | Prisma.RecurringDonationUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.RecurringDonationCreateOrConnectWithoutUserInput | Prisma.RecurringDonationCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.RecurringDonationUpsertWithWhereUniqueWithoutUserInput | Prisma.RecurringDonationUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.RecurringDonationCreateManyUserInputEnvelope
-  set?: Prisma.RecurringDonationWhereUniqueInput | Prisma.RecurringDonationWhereUniqueInput[]
-  disconnect?: Prisma.RecurringDonationWhereUniqueInput | Prisma.RecurringDonationWhereUniqueInput[]
-  delete?: Prisma.RecurringDonationWhereUniqueInput | Prisma.RecurringDonationWhereUniqueInput[]
-  connect?: Prisma.RecurringDonationWhereUniqueInput | Prisma.RecurringDonationWhereUniqueInput[]
-  update?: Prisma.RecurringDonationUpdateWithWhereUniqueWithoutUserInput | Prisma.RecurringDonationUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.RecurringDonationUpdateManyWithWhereWithoutUserInput | Prisma.RecurringDonationUpdateManyWithWhereWithoutUserInput[]
-  deleteMany?: Prisma.RecurringDonationScalarWhereInput | Prisma.RecurringDonationScalarWhereInput[]
-}
-
-export type RecurringDonationUncheckedUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.RecurringDonationCreateWithoutUserInput, Prisma.RecurringDonationUncheckedCreateWithoutUserInput> | Prisma.RecurringDonationCreateWithoutUserInput[] | Prisma.RecurringDonationUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.RecurringDonationCreateOrConnectWithoutUserInput | Prisma.RecurringDonationCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.RecurringDonationUpsertWithWhereUniqueWithoutUserInput | Prisma.RecurringDonationUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.RecurringDonationCreateManyUserInputEnvelope
-  set?: Prisma.RecurringDonationWhereUniqueInput | Prisma.RecurringDonationWhereUniqueInput[]
-  disconnect?: Prisma.RecurringDonationWhereUniqueInput | Prisma.RecurringDonationWhereUniqueInput[]
-  delete?: Prisma.RecurringDonationWhereUniqueInput | Prisma.RecurringDonationWhereUniqueInput[]
-  connect?: Prisma.RecurringDonationWhereUniqueInput | Prisma.RecurringDonationWhereUniqueInput[]
-  update?: Prisma.RecurringDonationUpdateWithWhereUniqueWithoutUserInput | Prisma.RecurringDonationUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.RecurringDonationUpdateManyWithWhereWithoutUserInput | Prisma.RecurringDonationUpdateManyWithWhereWithoutUserInput[]
-  deleteMany?: Prisma.RecurringDonationScalarWhereInput | Prisma.RecurringDonationScalarWhereInput[]
-}
-
 export type RecurringDonationCreateWithoutCampaignInput = {
   id?: string
   amount: number
@@ -548,7 +548,7 @@ export type RecurringDonationCreateWithoutCampaignInput = {
   nextPaymentDate: Date | string
   status?: string
   createdAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutRecurringDonationsInput
+  donor: Prisma.DonorCreateNestedOneWithoutRecurringDonationsInput
   donations?: Prisma.DonationCreateNestedManyWithoutRecurringInput
 }
 
@@ -603,6 +603,54 @@ export type RecurringDonationScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"RecurringDonation"> | Date | string
 }
 
+export type RecurringDonationCreateWithoutDonorInput = {
+  id?: string
+  amount: number
+  interval?: string
+  nextPaymentDate: Date | string
+  status?: string
+  createdAt?: Date | string
+  campaign?: Prisma.CampaignCreateNestedOneWithoutRecurringDonationsInput
+  donations?: Prisma.DonationCreateNestedManyWithoutRecurringInput
+}
+
+export type RecurringDonationUncheckedCreateWithoutDonorInput = {
+  id?: string
+  campaignId?: string | null
+  amount: number
+  interval?: string
+  nextPaymentDate: Date | string
+  status?: string
+  createdAt?: Date | string
+  donations?: Prisma.DonationUncheckedCreateNestedManyWithoutRecurringInput
+}
+
+export type RecurringDonationCreateOrConnectWithoutDonorInput = {
+  where: Prisma.RecurringDonationWhereUniqueInput
+  create: Prisma.XOR<Prisma.RecurringDonationCreateWithoutDonorInput, Prisma.RecurringDonationUncheckedCreateWithoutDonorInput>
+}
+
+export type RecurringDonationCreateManyDonorInputEnvelope = {
+  data: Prisma.RecurringDonationCreateManyDonorInput | Prisma.RecurringDonationCreateManyDonorInput[]
+  skipDuplicates?: boolean
+}
+
+export type RecurringDonationUpsertWithWhereUniqueWithoutDonorInput = {
+  where: Prisma.RecurringDonationWhereUniqueInput
+  update: Prisma.XOR<Prisma.RecurringDonationUpdateWithoutDonorInput, Prisma.RecurringDonationUncheckedUpdateWithoutDonorInput>
+  create: Prisma.XOR<Prisma.RecurringDonationCreateWithoutDonorInput, Prisma.RecurringDonationUncheckedCreateWithoutDonorInput>
+}
+
+export type RecurringDonationUpdateWithWhereUniqueWithoutDonorInput = {
+  where: Prisma.RecurringDonationWhereUniqueInput
+  data: Prisma.XOR<Prisma.RecurringDonationUpdateWithoutDonorInput, Prisma.RecurringDonationUncheckedUpdateWithoutDonorInput>
+}
+
+export type RecurringDonationUpdateManyWithWhereWithoutDonorInput = {
+  where: Prisma.RecurringDonationScalarWhereInput
+  data: Prisma.XOR<Prisma.RecurringDonationUpdateManyMutationInput, Prisma.RecurringDonationUncheckedUpdateManyWithoutDonorInput>
+}
+
 export type RecurringDonationCreateWithoutDonationsInput = {
   id?: string
   amount: number
@@ -610,7 +658,7 @@ export type RecurringDonationCreateWithoutDonationsInput = {
   nextPaymentDate: Date | string
   status?: string
   createdAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutRecurringDonationsInput
+  donor: Prisma.DonorCreateNestedOneWithoutRecurringDonationsInput
   campaign?: Prisma.CampaignCreateNestedOneWithoutRecurringDonationsInput
 }
 
@@ -648,7 +696,7 @@ export type RecurringDonationUpdateWithoutDonationsInput = {
   nextPaymentDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutRecurringDonationsNestedInput
+  donor?: Prisma.DonorUpdateOneRequiredWithoutRecurringDonationsNestedInput
   campaign?: Prisma.CampaignUpdateOneWithoutRecurringDonationsNestedInput
 }
 
@@ -661,54 +709,6 @@ export type RecurringDonationUncheckedUpdateWithoutDonationsInput = {
   nextPaymentDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type RecurringDonationCreateWithoutUserInput = {
-  id?: string
-  amount: number
-  interval?: string
-  nextPaymentDate: Date | string
-  status?: string
-  createdAt?: Date | string
-  campaign?: Prisma.CampaignCreateNestedOneWithoutRecurringDonationsInput
-  donations?: Prisma.DonationCreateNestedManyWithoutRecurringInput
-}
-
-export type RecurringDonationUncheckedCreateWithoutUserInput = {
-  id?: string
-  campaignId?: string | null
-  amount: number
-  interval?: string
-  nextPaymentDate: Date | string
-  status?: string
-  createdAt?: Date | string
-  donations?: Prisma.DonationUncheckedCreateNestedManyWithoutRecurringInput
-}
-
-export type RecurringDonationCreateOrConnectWithoutUserInput = {
-  where: Prisma.RecurringDonationWhereUniqueInput
-  create: Prisma.XOR<Prisma.RecurringDonationCreateWithoutUserInput, Prisma.RecurringDonationUncheckedCreateWithoutUserInput>
-}
-
-export type RecurringDonationCreateManyUserInputEnvelope = {
-  data: Prisma.RecurringDonationCreateManyUserInput | Prisma.RecurringDonationCreateManyUserInput[]
-  skipDuplicates?: boolean
-}
-
-export type RecurringDonationUpsertWithWhereUniqueWithoutUserInput = {
-  where: Prisma.RecurringDonationWhereUniqueInput
-  update: Prisma.XOR<Prisma.RecurringDonationUpdateWithoutUserInput, Prisma.RecurringDonationUncheckedUpdateWithoutUserInput>
-  create: Prisma.XOR<Prisma.RecurringDonationCreateWithoutUserInput, Prisma.RecurringDonationUncheckedCreateWithoutUserInput>
-}
-
-export type RecurringDonationUpdateWithWhereUniqueWithoutUserInput = {
-  where: Prisma.RecurringDonationWhereUniqueInput
-  data: Prisma.XOR<Prisma.RecurringDonationUpdateWithoutUserInput, Prisma.RecurringDonationUncheckedUpdateWithoutUserInput>
-}
-
-export type RecurringDonationUpdateManyWithWhereWithoutUserInput = {
-  where: Prisma.RecurringDonationScalarWhereInput
-  data: Prisma.XOR<Prisma.RecurringDonationUpdateManyMutationInput, Prisma.RecurringDonationUncheckedUpdateManyWithoutUserInput>
 }
 
 export type RecurringDonationCreateManyCampaignInput = {
@@ -728,7 +728,7 @@ export type RecurringDonationUpdateWithoutCampaignInput = {
   nextPaymentDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutRecurringDonationsNestedInput
+  donor?: Prisma.DonorUpdateOneRequiredWithoutRecurringDonationsNestedInput
   donations?: Prisma.DonationUpdateManyWithoutRecurringNestedInput
 }
 
@@ -753,7 +753,7 @@ export type RecurringDonationUncheckedUpdateManyWithoutCampaignInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type RecurringDonationCreateManyUserInput = {
+export type RecurringDonationCreateManyDonorInput = {
   id?: string
   campaignId?: string | null
   amount: number
@@ -763,7 +763,7 @@ export type RecurringDonationCreateManyUserInput = {
   createdAt?: Date | string
 }
 
-export type RecurringDonationUpdateWithoutUserInput = {
+export type RecurringDonationUpdateWithoutDonorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   interval?: Prisma.StringFieldUpdateOperationsInput | string
@@ -774,7 +774,7 @@ export type RecurringDonationUpdateWithoutUserInput = {
   donations?: Prisma.DonationUpdateManyWithoutRecurringNestedInput
 }
 
-export type RecurringDonationUncheckedUpdateWithoutUserInput = {
+export type RecurringDonationUncheckedUpdateWithoutDonorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   campaignId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -785,7 +785,7 @@ export type RecurringDonationUncheckedUpdateWithoutUserInput = {
   donations?: Prisma.DonationUncheckedUpdateManyWithoutRecurringNestedInput
 }
 
-export type RecurringDonationUncheckedUpdateManyWithoutUserInput = {
+export type RecurringDonationUncheckedUpdateManyWithoutDonorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   campaignId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
@@ -835,7 +835,7 @@ export type RecurringDonationSelect<ExtArgs extends runtime.Types.Extensions.Int
   nextPaymentDate?: boolean
   status?: boolean
   createdAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  donor?: boolean | Prisma.DonorDefaultArgs<ExtArgs>
   campaign?: boolean | Prisma.RecurringDonation$campaignArgs<ExtArgs>
   donations?: boolean | Prisma.RecurringDonation$donationsArgs<ExtArgs>
   _count?: boolean | Prisma.RecurringDonationCountOutputTypeDefaultArgs<ExtArgs>
@@ -850,7 +850,7 @@ export type RecurringDonationSelectCreateManyAndReturn<ExtArgs extends runtime.T
   nextPaymentDate?: boolean
   status?: boolean
   createdAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  donor?: boolean | Prisma.DonorDefaultArgs<ExtArgs>
   campaign?: boolean | Prisma.RecurringDonation$campaignArgs<ExtArgs>
 }, ExtArgs["result"]["recurringDonation"]>
 
@@ -863,7 +863,7 @@ export type RecurringDonationSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   nextPaymentDate?: boolean
   status?: boolean
   createdAt?: boolean
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  donor?: boolean | Prisma.DonorDefaultArgs<ExtArgs>
   campaign?: boolean | Prisma.RecurringDonation$campaignArgs<ExtArgs>
 }, ExtArgs["result"]["recurringDonation"]>
 
@@ -880,24 +880,24 @@ export type RecurringDonationSelectScalar = {
 
 export type RecurringDonationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "campaignId" | "amount" | "interval" | "nextPaymentDate" | "status" | "createdAt", ExtArgs["result"]["recurringDonation"]>
 export type RecurringDonationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  donor?: boolean | Prisma.DonorDefaultArgs<ExtArgs>
   campaign?: boolean | Prisma.RecurringDonation$campaignArgs<ExtArgs>
   donations?: boolean | Prisma.RecurringDonation$donationsArgs<ExtArgs>
   _count?: boolean | Prisma.RecurringDonationCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type RecurringDonationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  donor?: boolean | Prisma.DonorDefaultArgs<ExtArgs>
   campaign?: boolean | Prisma.RecurringDonation$campaignArgs<ExtArgs>
 }
 export type RecurringDonationIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  donor?: boolean | Prisma.DonorDefaultArgs<ExtArgs>
   campaign?: boolean | Prisma.RecurringDonation$campaignArgs<ExtArgs>
 }
 
 export type $RecurringDonationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "RecurringDonation"
   objects: {
-    user: Prisma.$UserPayload<ExtArgs>
+    donor: Prisma.$DonorPayload<ExtArgs>
     campaign: Prisma.$CampaignPayload<ExtArgs> | null
     donations: Prisma.$DonationPayload<ExtArgs>[]
   }
@@ -1304,7 +1304,7 @@ readonly fields: RecurringDonationFieldRefs;
  */
 export interface Prisma__RecurringDonationClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  donor<T extends Prisma.DonorDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DonorDefaultArgs<ExtArgs>>): Prisma.Prisma__DonorClient<runtime.Types.Result.GetResult<Prisma.$DonorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   campaign<T extends Prisma.RecurringDonation$campaignArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RecurringDonation$campaignArgs<ExtArgs>>): Prisma.Prisma__CampaignClient<runtime.Types.Result.GetResult<Prisma.$CampaignPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   donations<T extends Prisma.RecurringDonation$donationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.RecurringDonation$donationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DonationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**

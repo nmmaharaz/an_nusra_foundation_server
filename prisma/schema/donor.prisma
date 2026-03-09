@@ -1,6 +1,15 @@
+model Donor {
+    id                 String              @id @default(uuid())
+    userId             String              @unique
+    createdAt          DateTime            @default(now())
+    user               User                @relation(fields: [userId], references: [id])
+    donations          Donation[]
+    recurringDonations RecurringDonation[]
+}
+
 model Donation {
     id          String   @id @default(uuid())
-    userId      String
+    donorId     String
     campaignId  String?
     amount      Float
     status      String   @default("pending")
@@ -8,7 +17,7 @@ model Donation {
     recurringId String?
     createdAt   DateTime @default(now())
 
-    user        User               @relation(fields: [userId], references: [id])
+    donor       Donor              @relation(fields: [donorId], references: [id])
     campaign    Campaign?          @relation(fields: [campaignId], references: [id])
     recurring   RecurringDonation? @relation(fields: [recurringId], references: [id])
     transaction Transaction[]
@@ -24,7 +33,7 @@ model RecurringDonation {
     status          String   @default("active")
     createdAt       DateTime @default(now())
 
-    user      User       @relation(fields: [userId], references: [id])
+    donor     Donor      @relation(fields: [userId], references: [id])
     campaign  Campaign?  @relation(fields: [campaignId], references: [id])
     donations Donation[]
 }

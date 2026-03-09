@@ -30,8 +30,9 @@ export type UserMinAggregateOutputType = {
   email: string | null
   password: string | null
   phone: string | null
-  status: string | null
+  status: $Enums.UserStatus | null
   createdAt: Date | null
+  isVerification: boolean | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -40,8 +41,9 @@ export type UserMaxAggregateOutputType = {
   email: string | null
   password: string | null
   phone: string | null
-  status: string | null
+  status: $Enums.UserStatus | null
   createdAt: Date | null
+  isVerification: boolean | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -52,6 +54,7 @@ export type UserCountAggregateOutputType = {
   phone: number
   status: number
   createdAt: number
+  isVerification: number
   _all: number
 }
 
@@ -64,6 +67,7 @@ export type UserMinAggregateInputType = {
   phone?: true
   status?: true
   createdAt?: true
+  isVerification?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -74,6 +78,7 @@ export type UserMaxAggregateInputType = {
   phone?: true
   status?: true
   createdAt?: true
+  isVerification?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -84,6 +89,7 @@ export type UserCountAggregateInputType = {
   phone?: true
   status?: true
   createdAt?: true
+  isVerification?: true
   _all?: true
 }
 
@@ -165,8 +171,9 @@ export type UserGroupByOutputType = {
   email: string
   password: string
   phone: string | null
-  status: string
+  status: $Enums.UserStatus
   createdAt: Date
+  isVerification: boolean
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -196,22 +203,20 @@ export type UserWhereInput = {
   email?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
   phone?: Prisma.StringNullableFilter<"User"> | string | null
-  status?: Prisma.StringFilter<"User"> | string
+  status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  roles?: Prisma.UserRoleListRelationFilter
-  donations?: Prisma.DonationListRelationFilter
-  recurringDonations?: Prisma.RecurringDonationListRelationFilter
-  enrollments?: Prisma.EnrollmentListRelationFilter
-  lessonProgress?: Prisma.LessonProgressListRelationFilter
-  certificates?: Prisma.CertificateListRelationFilter
+  isVerification?: Prisma.BoolFilter<"User"> | boolean
+  Donor?: Prisma.XOR<Prisma.DonorNullableScalarRelationFilter, Prisma.DonorWhereInput> | null
   volunteer?: Prisma.XOR<Prisma.VolunteerNullableScalarRelationFilter, Prisma.VolunteerWhereInput> | null
   trainer?: Prisma.XOR<Prisma.TrainerNullableScalarRelationFilter, Prisma.TrainerWhereInput> | null
+  roles?: Prisma.UserRoleListRelationFilter
+  enrollments?: Prisma.EnrollmentListRelationFilter
+  lessonProgress?: Prisma.LessonProgressListRelationFilter
   posts?: Prisma.PostListRelationFilter
   notifications?: Prisma.UserNotificationListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
-  memberProfile?: Prisma.XOR<Prisma.MemberProfileNullableScalarRelationFilter, Prisma.MemberProfileWhereInput> | null
+  member?: Prisma.XOR<Prisma.MemberNullableScalarRelationFilter, Prisma.MemberWhereInput> | null
   impactReports?: Prisma.ImpactReportListRelationFilter
-  courseReviews?: Prisma.CourseReviewListRelationFilter
   volunteerApplications?: Prisma.VolunteerApplicationListRelationFilter
   eventRegistrations?: Prisma.EventRegistrationListRelationFilter
   mediaFiles?: Prisma.MediaFileListRelationFilter
@@ -226,20 +231,18 @@ export type UserOrderByWithRelationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  roles?: Prisma.UserRoleOrderByRelationAggregateInput
-  donations?: Prisma.DonationOrderByRelationAggregateInput
-  recurringDonations?: Prisma.RecurringDonationOrderByRelationAggregateInput
-  enrollments?: Prisma.EnrollmentOrderByRelationAggregateInput
-  lessonProgress?: Prisma.LessonProgressOrderByRelationAggregateInput
-  certificates?: Prisma.CertificateOrderByRelationAggregateInput
+  isVerification?: Prisma.SortOrder
+  Donor?: Prisma.DonorOrderByWithRelationInput
   volunteer?: Prisma.VolunteerOrderByWithRelationInput
   trainer?: Prisma.TrainerOrderByWithRelationInput
+  roles?: Prisma.UserRoleOrderByRelationAggregateInput
+  enrollments?: Prisma.EnrollmentOrderByRelationAggregateInput
+  lessonProgress?: Prisma.LessonProgressOrderByRelationAggregateInput
   posts?: Prisma.PostOrderByRelationAggregateInput
   notifications?: Prisma.UserNotificationOrderByRelationAggregateInput
   auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
-  memberProfile?: Prisma.MemberProfileOrderByWithRelationInput
+  member?: Prisma.MemberOrderByWithRelationInput
   impactReports?: Prisma.ImpactReportOrderByRelationAggregateInput
-  courseReviews?: Prisma.CourseReviewOrderByRelationAggregateInput
   volunteerApplications?: Prisma.VolunteerApplicationOrderByRelationAggregateInput
   eventRegistrations?: Prisma.EventRegistrationOrderByRelationAggregateInput
   mediaFiles?: Prisma.MediaFileOrderByRelationAggregateInput
@@ -255,22 +258,20 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
   phone?: Prisma.StringNullableFilter<"User"> | string | null
-  status?: Prisma.StringFilter<"User"> | string
+  status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  roles?: Prisma.UserRoleListRelationFilter
-  donations?: Prisma.DonationListRelationFilter
-  recurringDonations?: Prisma.RecurringDonationListRelationFilter
-  enrollments?: Prisma.EnrollmentListRelationFilter
-  lessonProgress?: Prisma.LessonProgressListRelationFilter
-  certificates?: Prisma.CertificateListRelationFilter
+  isVerification?: Prisma.BoolFilter<"User"> | boolean
+  Donor?: Prisma.XOR<Prisma.DonorNullableScalarRelationFilter, Prisma.DonorWhereInput> | null
   volunteer?: Prisma.XOR<Prisma.VolunteerNullableScalarRelationFilter, Prisma.VolunteerWhereInput> | null
   trainer?: Prisma.XOR<Prisma.TrainerNullableScalarRelationFilter, Prisma.TrainerWhereInput> | null
+  roles?: Prisma.UserRoleListRelationFilter
+  enrollments?: Prisma.EnrollmentListRelationFilter
+  lessonProgress?: Prisma.LessonProgressListRelationFilter
   posts?: Prisma.PostListRelationFilter
   notifications?: Prisma.UserNotificationListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
-  memberProfile?: Prisma.XOR<Prisma.MemberProfileNullableScalarRelationFilter, Prisma.MemberProfileWhereInput> | null
+  member?: Prisma.XOR<Prisma.MemberNullableScalarRelationFilter, Prisma.MemberWhereInput> | null
   impactReports?: Prisma.ImpactReportListRelationFilter
-  courseReviews?: Prisma.CourseReviewListRelationFilter
   volunteerApplications?: Prisma.VolunteerApplicationListRelationFilter
   eventRegistrations?: Prisma.EventRegistrationListRelationFilter
   mediaFiles?: Prisma.MediaFileListRelationFilter
@@ -285,6 +286,7 @@ export type UserOrderByWithAggregationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  isVerification?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -299,8 +301,9 @@ export type UserScalarWhereWithAggregatesInput = {
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   password?: Prisma.StringWithAggregatesFilter<"User"> | string
   phone?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  status?: Prisma.StringWithAggregatesFilter<"User"> | string
+  status?: Prisma.EnumUserStatusWithAggregatesFilter<"User"> | $Enums.UserStatus
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  isVerification?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
 }
 
 export type UserCreateInput = {
@@ -309,22 +312,20 @@ export type UserCreateInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateCreateNestedManyWithoutUserInput
+  isVerification?: boolean
+  Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileCreateNestedManyWithoutUserInput
@@ -337,22 +338,20 @@ export type UserUncheckedCreateInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationUncheckedCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateUncheckedCreateNestedManyWithoutUserInput
+  isVerification?: boolean
+  Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileUncheckedCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportUncheckedCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewUncheckedCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileUncheckedCreateNestedManyWithoutUserInput
@@ -365,22 +364,20 @@ export type UserUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUpdateManyWithoutUserNestedInput
@@ -393,22 +390,20 @@ export type UserUncheckedUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUncheckedUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUncheckedUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUncheckedUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUncheckedUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUncheckedUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUncheckedUpdateManyWithoutUserNestedInput
@@ -421,8 +416,9 @@ export type UserCreateManyInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
+  isVerification?: boolean
 }
 
 export type UserUpdateManyMutationInput = {
@@ -431,8 +427,9 @@ export type UserUpdateManyMutationInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -441,8 +438,9 @@ export type UserUncheckedUpdateManyInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type UserScalarRelationFilter = {
@@ -458,6 +456,7 @@ export type UserCountOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  isVerification?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -468,6 +467,7 @@ export type UserMaxOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  isVerification?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -478,6 +478,7 @@ export type UserMinOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  isVerification?: Prisma.SortOrder
 }
 
 export type UserCreateNestedOneWithoutEnrollmentsInput = {
@@ -508,60 +509,18 @@ export type UserUpdateOneRequiredWithoutLessonProgressNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutLessonProgressInput, Prisma.UserUpdateWithoutLessonProgressInput>, Prisma.UserUncheckedUpdateWithoutLessonProgressInput>
 }
 
-export type UserCreateNestedOneWithoutCertificatesInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutCertificatesInput, Prisma.UserUncheckedCreateWithoutCertificatesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCertificatesInput
+export type UserCreateNestedOneWithoutDonorInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDonorInput, Prisma.UserUncheckedCreateWithoutDonorInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDonorInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutCertificatesNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutCertificatesInput, Prisma.UserUncheckedCreateWithoutCertificatesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCertificatesInput
-  upsert?: Prisma.UserUpsertWithoutCertificatesInput
+export type UserUpdateOneRequiredWithoutDonorNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutDonorInput, Prisma.UserUncheckedCreateWithoutDonorInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDonorInput
+  upsert?: Prisma.UserUpsertWithoutDonorInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCertificatesInput, Prisma.UserUpdateWithoutCertificatesInput>, Prisma.UserUncheckedUpdateWithoutCertificatesInput>
-}
-
-export type UserCreateNestedOneWithoutCourseReviewsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutCourseReviewsInput, Prisma.UserUncheckedCreateWithoutCourseReviewsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCourseReviewsInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutCourseReviewsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutCourseReviewsInput, Prisma.UserUncheckedCreateWithoutCourseReviewsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCourseReviewsInput
-  upsert?: Prisma.UserUpsertWithoutCourseReviewsInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCourseReviewsInput, Prisma.UserUpdateWithoutCourseReviewsInput>, Prisma.UserUncheckedUpdateWithoutCourseReviewsInput>
-}
-
-export type UserCreateNestedOneWithoutDonationsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutDonationsInput, Prisma.UserUncheckedCreateWithoutDonationsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDonationsInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutDonationsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutDonationsInput, Prisma.UserUncheckedCreateWithoutDonationsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutDonationsInput
-  upsert?: Prisma.UserUpsertWithoutDonationsInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDonationsInput, Prisma.UserUpdateWithoutDonationsInput>, Prisma.UserUncheckedUpdateWithoutDonationsInput>
-}
-
-export type UserCreateNestedOneWithoutRecurringDonationsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutRecurringDonationsInput, Prisma.UserUncheckedCreateWithoutRecurringDonationsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRecurringDonationsInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutRecurringDonationsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutRecurringDonationsInput, Prisma.UserUncheckedCreateWithoutRecurringDonationsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRecurringDonationsInput
-  upsert?: Prisma.UserUpsertWithoutRecurringDonationsInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRecurringDonationsInput, Prisma.UserUpdateWithoutRecurringDonationsInput>, Prisma.UserUncheckedUpdateWithoutRecurringDonationsInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutDonorInput, Prisma.UserUpdateWithoutDonorInput>, Prisma.UserUncheckedUpdateWithoutDonorInput>
 }
 
 export type UserCreateNestedOneWithoutImpactReportsInput = {
@@ -662,18 +621,22 @@ export type UserUpdateOneRequiredWithoutTrainerNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutTrainerInput, Prisma.UserUpdateWithoutTrainerInput>, Prisma.UserUncheckedUpdateWithoutTrainerInput>
 }
 
-export type UserCreateNestedOneWithoutMemberProfileInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutMemberProfileInput, Prisma.UserUncheckedCreateWithoutMemberProfileInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMemberProfileInput
+export type EnumUserStatusFieldUpdateOperationsInput = {
+  set?: $Enums.UserStatus
+}
+
+export type UserCreateNestedOneWithoutMemberInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMemberInput, Prisma.UserUncheckedCreateWithoutMemberInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMemberInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutMemberProfileNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutMemberProfileInput, Prisma.UserUncheckedCreateWithoutMemberProfileInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMemberProfileInput
-  upsert?: Prisma.UserUpsertWithoutMemberProfileInput
+export type UserUpdateOneRequiredWithoutMemberNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutMemberInput, Prisma.UserUncheckedCreateWithoutMemberInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMemberInput
+  upsert?: Prisma.UserUpsertWithoutMemberInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMemberProfileInput, Prisma.UserUpdateWithoutMemberProfileInput>, Prisma.UserUncheckedUpdateWithoutMemberProfileInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMemberInput, Prisma.UserUpdateWithoutMemberInput>, Prisma.UserUncheckedUpdateWithoutMemberInput>
 }
 
 export type UserCreateNestedOneWithoutNotificationsInput = {
@@ -738,21 +701,19 @@ export type UserCreateWithoutEnrollmentsInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateCreateNestedManyWithoutUserInput
+  isVerification?: boolean
+  Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileCreateNestedManyWithoutUserInput
@@ -765,21 +726,19 @@ export type UserUncheckedCreateWithoutEnrollmentsInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationUncheckedCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateUncheckedCreateNestedManyWithoutUserInput
+  isVerification?: boolean
+  Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileUncheckedCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportUncheckedCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewUncheckedCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileUncheckedCreateNestedManyWithoutUserInput
@@ -808,21 +767,19 @@ export type UserUpdateWithoutEnrollmentsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUpdateManyWithoutUserNestedInput
@@ -835,21 +792,19 @@ export type UserUncheckedUpdateWithoutEnrollmentsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUncheckedUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUncheckedUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUncheckedUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUncheckedUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUncheckedUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUncheckedUpdateManyWithoutUserNestedInput
@@ -862,21 +817,19 @@ export type UserCreateWithoutLessonProgressInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateCreateNestedManyWithoutUserInput
+  isVerification?: boolean
+  Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileCreateNestedManyWithoutUserInput
@@ -889,21 +842,19 @@ export type UserUncheckedCreateWithoutLessonProgressInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationUncheckedCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateUncheckedCreateNestedManyWithoutUserInput
+  isVerification?: boolean
+  Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileUncheckedCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportUncheckedCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewUncheckedCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileUncheckedCreateNestedManyWithoutUserInput
@@ -932,21 +883,19 @@ export type UserUpdateWithoutLessonProgressInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUpdateManyWithoutUserNestedInput
@@ -959,268 +908,18 @@ export type UserUncheckedUpdateWithoutLessonProgressInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUncheckedUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUncheckedUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUncheckedUpdateOneWithoutUserNestedInput
-  impactReports?: Prisma.ImpactReportUncheckedUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUncheckedUpdateManyWithoutUserNestedInput
-  volunteerApplications?: Prisma.VolunteerApplicationUncheckedUpdateManyWithoutUserNestedInput
-  eventRegistrations?: Prisma.EventRegistrationUncheckedUpdateManyWithoutUserNestedInput
-  mediaFiles?: Prisma.MediaFileUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserCreateWithoutCertificatesInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  phone?: string | null
-  status?: string
-  createdAt?: Date | string
-  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
-  volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
-  trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
-  posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
-  notifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
-  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileCreateNestedOneWithoutUserInput
-  impactReports?: Prisma.ImpactReportCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewCreateNestedManyWithoutUserInput
-  volunteerApplications?: Prisma.VolunteerApplicationCreateNestedManyWithoutUserInput
-  eventRegistrations?: Prisma.EventRegistrationCreateNestedManyWithoutUserInput
-  mediaFiles?: Prisma.MediaFileCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutCertificatesInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  phone?: string | null
-  status?: string
-  createdAt?: Date | string
-  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationUncheckedCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
-  volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
-  trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
-  posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
-  notifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
-  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileUncheckedCreateNestedOneWithoutUserInput
-  impactReports?: Prisma.ImpactReportUncheckedCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewUncheckedCreateNestedManyWithoutUserInput
-  volunteerApplications?: Prisma.VolunteerApplicationUncheckedCreateNestedManyWithoutUserInput
-  eventRegistrations?: Prisma.EventRegistrationUncheckedCreateNestedManyWithoutUserInput
-  mediaFiles?: Prisma.MediaFileUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutCertificatesInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutCertificatesInput, Prisma.UserUncheckedCreateWithoutCertificatesInput>
-}
-
-export type UserUpsertWithoutCertificatesInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutCertificatesInput, Prisma.UserUncheckedUpdateWithoutCertificatesInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutCertificatesInput, Prisma.UserUncheckedCreateWithoutCertificatesInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutCertificatesInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutCertificatesInput, Prisma.UserUncheckedUpdateWithoutCertificatesInput>
-}
-
-export type UserUpdateWithoutCertificatesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
-  volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
-  trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
-  posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
-  notifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
-  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUpdateOneWithoutUserNestedInput
-  impactReports?: Prisma.ImpactReportUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUpdateManyWithoutUserNestedInput
-  volunteerApplications?: Prisma.VolunteerApplicationUpdateManyWithoutUserNestedInput
-  eventRegistrations?: Prisma.EventRegistrationUpdateManyWithoutUserNestedInput
-  mediaFiles?: Prisma.MediaFileUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-}
-
-export type UserUncheckedUpdateWithoutCertificatesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUncheckedUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
-  volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
-  trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
-  posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
-  notifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
-  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUncheckedUpdateOneWithoutUserNestedInput
-  impactReports?: Prisma.ImpactReportUncheckedUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUncheckedUpdateManyWithoutUserNestedInput
-  volunteerApplications?: Prisma.VolunteerApplicationUncheckedUpdateManyWithoutUserNestedInput
-  eventRegistrations?: Prisma.EventRegistrationUncheckedUpdateManyWithoutUserNestedInput
-  mediaFiles?: Prisma.MediaFileUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserCreateWithoutCourseReviewsInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  phone?: string | null
-  status?: string
-  createdAt?: Date | string
-  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateCreateNestedManyWithoutUserInput
-  volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
-  trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
-  posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
-  notifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
-  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileCreateNestedOneWithoutUserInput
-  impactReports?: Prisma.ImpactReportCreateNestedManyWithoutDonorInput
-  volunteerApplications?: Prisma.VolunteerApplicationCreateNestedManyWithoutUserInput
-  eventRegistrations?: Prisma.EventRegistrationCreateNestedManyWithoutUserInput
-  mediaFiles?: Prisma.MediaFileCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutCourseReviewsInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  phone?: string | null
-  status?: string
-  createdAt?: Date | string
-  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationUncheckedCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateUncheckedCreateNestedManyWithoutUserInput
-  volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
-  trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
-  posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
-  notifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
-  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileUncheckedCreateNestedOneWithoutUserInput
-  impactReports?: Prisma.ImpactReportUncheckedCreateNestedManyWithoutDonorInput
-  volunteerApplications?: Prisma.VolunteerApplicationUncheckedCreateNestedManyWithoutUserInput
-  eventRegistrations?: Prisma.EventRegistrationUncheckedCreateNestedManyWithoutUserInput
-  mediaFiles?: Prisma.MediaFileUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutCourseReviewsInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutCourseReviewsInput, Prisma.UserUncheckedCreateWithoutCourseReviewsInput>
-}
-
-export type UserUpsertWithoutCourseReviewsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutCourseReviewsInput, Prisma.UserUncheckedUpdateWithoutCourseReviewsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutCourseReviewsInput, Prisma.UserUncheckedCreateWithoutCourseReviewsInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutCourseReviewsInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutCourseReviewsInput, Prisma.UserUncheckedUpdateWithoutCourseReviewsInput>
-}
-
-export type UserUpdateWithoutCourseReviewsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUpdateManyWithoutUserNestedInput
-  volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
-  trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
-  posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
-  notifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
-  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUpdateOneWithoutUserNestedInput
-  impactReports?: Prisma.ImpactReportUpdateManyWithoutDonorNestedInput
-  volunteerApplications?: Prisma.VolunteerApplicationUpdateManyWithoutUserNestedInput
-  eventRegistrations?: Prisma.EventRegistrationUpdateManyWithoutUserNestedInput
-  mediaFiles?: Prisma.MediaFileUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-}
-
-export type UserUncheckedUpdateWithoutCourseReviewsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUncheckedUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUncheckedUpdateManyWithoutUserNestedInput
-  volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
-  trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
-  posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
-  notifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
-  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUncheckedUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUncheckedUpdateManyWithoutDonorNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedUpdateManyWithoutUserNestedInput
@@ -1228,248 +927,116 @@ export type UserUncheckedUpdateWithoutCourseReviewsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
-export type UserCreateWithoutDonationsInput = {
+export type UserCreateWithoutDonorInput = {
   id?: string
   name: string
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateCreateNestedManyWithoutUserInput
+  isVerification?: boolean
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
-export type UserUncheckedCreateWithoutDonationsInput = {
+export type UserUncheckedCreateWithoutDonorInput = {
   id?: string
   name: string
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateUncheckedCreateNestedManyWithoutUserInput
+  isVerification?: boolean
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileUncheckedCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportUncheckedCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewUncheckedCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
-export type UserCreateOrConnectWithoutDonationsInput = {
+export type UserCreateOrConnectWithoutDonorInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutDonationsInput, Prisma.UserUncheckedCreateWithoutDonationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutDonorInput, Prisma.UserUncheckedCreateWithoutDonorInput>
 }
 
-export type UserUpsertWithoutDonationsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutDonationsInput, Prisma.UserUncheckedUpdateWithoutDonationsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutDonationsInput, Prisma.UserUncheckedCreateWithoutDonationsInput>
+export type UserUpsertWithoutDonorInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutDonorInput, Prisma.UserUncheckedUpdateWithoutDonorInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutDonorInput, Prisma.UserUncheckedCreateWithoutDonorInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutDonationsInput = {
+export type UserUpdateToOneWithWhereWithoutDonorInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutDonationsInput, Prisma.UserUncheckedUpdateWithoutDonationsInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutDonorInput, Prisma.UserUncheckedUpdateWithoutDonorInput>
 }
 
-export type UserUpdateWithoutDonationsInput = {
+export type UserUpdateWithoutDonorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
-export type UserUncheckedUpdateWithoutDonationsInput = {
+export type UserUncheckedUpdateWithoutDonorInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUncheckedUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUncheckedUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUncheckedUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUncheckedUpdateManyWithoutUserNestedInput
-  volunteerApplications?: Prisma.VolunteerApplicationUncheckedUpdateManyWithoutUserNestedInput
-  eventRegistrations?: Prisma.EventRegistrationUncheckedUpdateManyWithoutUserNestedInput
-  mediaFiles?: Prisma.MediaFileUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserCreateWithoutRecurringDonationsInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  phone?: string | null
-  status?: string
-  createdAt?: Date | string
-  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateCreateNestedManyWithoutUserInput
-  volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
-  trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
-  posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
-  notifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
-  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileCreateNestedOneWithoutUserInput
-  impactReports?: Prisma.ImpactReportCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewCreateNestedManyWithoutUserInput
-  volunteerApplications?: Prisma.VolunteerApplicationCreateNestedManyWithoutUserInput
-  eventRegistrations?: Prisma.EventRegistrationCreateNestedManyWithoutUserInput
-  mediaFiles?: Prisma.MediaFileCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutRecurringDonationsInput = {
-  id?: string
-  name: string
-  email: string
-  password: string
-  phone?: string | null
-  status?: string
-  createdAt?: Date | string
-  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationUncheckedCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateUncheckedCreateNestedManyWithoutUserInput
-  volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
-  trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
-  posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
-  notifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
-  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileUncheckedCreateNestedOneWithoutUserInput
-  impactReports?: Prisma.ImpactReportUncheckedCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewUncheckedCreateNestedManyWithoutUserInput
-  volunteerApplications?: Prisma.VolunteerApplicationUncheckedCreateNestedManyWithoutUserInput
-  eventRegistrations?: Prisma.EventRegistrationUncheckedCreateNestedManyWithoutUserInput
-  mediaFiles?: Prisma.MediaFileUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutRecurringDonationsInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutRecurringDonationsInput, Prisma.UserUncheckedCreateWithoutRecurringDonationsInput>
-}
-
-export type UserUpsertWithoutRecurringDonationsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutRecurringDonationsInput, Prisma.UserUncheckedUpdateWithoutRecurringDonationsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutRecurringDonationsInput, Prisma.UserUncheckedCreateWithoutRecurringDonationsInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutRecurringDonationsInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutRecurringDonationsInput, Prisma.UserUncheckedUpdateWithoutRecurringDonationsInput>
-}
-
-export type UserUpdateWithoutRecurringDonationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUpdateManyWithoutUserNestedInput
-  volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
-  trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
-  posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
-  notifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
-  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUpdateOneWithoutUserNestedInput
-  impactReports?: Prisma.ImpactReportUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUpdateManyWithoutUserNestedInput
-  volunteerApplications?: Prisma.VolunteerApplicationUpdateManyWithoutUserNestedInput
-  eventRegistrations?: Prisma.EventRegistrationUpdateManyWithoutUserNestedInput
-  mediaFiles?: Prisma.MediaFileUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-}
-
-export type UserUncheckedUpdateWithoutRecurringDonationsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUncheckedUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUncheckedUpdateManyWithoutUserNestedInput
-  volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
-  trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
-  posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
-  notifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
-  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUncheckedUpdateOneWithoutUserNestedInput
-  impactReports?: Prisma.ImpactReportUncheckedUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUncheckedUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUncheckedUpdateManyWithoutUserNestedInput
@@ -1482,21 +1049,19 @@ export type UserCreateWithoutImpactReportsInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateCreateNestedManyWithoutUserInput
+  isVerification?: boolean
+  Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileCreateNestedOneWithoutUserInput
-  courseReviews?: Prisma.CourseReviewCreateNestedManyWithoutUserInput
+  member?: Prisma.MemberCreateNestedOneWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileCreateNestedManyWithoutUserInput
@@ -1509,21 +1074,19 @@ export type UserUncheckedCreateWithoutImpactReportsInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationUncheckedCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateUncheckedCreateNestedManyWithoutUserInput
+  isVerification?: boolean
+  Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileUncheckedCreateNestedOneWithoutUserInput
-  courseReviews?: Prisma.CourseReviewUncheckedCreateNestedManyWithoutUserInput
+  member?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileUncheckedCreateNestedManyWithoutUserInput
@@ -1552,21 +1115,19 @@ export type UserUpdateWithoutImpactReportsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUpdateOneWithoutUserNestedInput
-  courseReviews?: Prisma.CourseReviewUpdateManyWithoutUserNestedInput
+  member?: Prisma.MemberUpdateOneWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUpdateManyWithoutUserNestedInput
@@ -1579,21 +1140,19 @@ export type UserUncheckedUpdateWithoutImpactReportsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUncheckedUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUncheckedUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUncheckedUpdateOneWithoutUserNestedInput
-  courseReviews?: Prisma.CourseReviewUncheckedUpdateManyWithoutUserNestedInput
+  member?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUncheckedUpdateManyWithoutUserNestedInput
@@ -1606,22 +1165,20 @@ export type UserCreateWithoutEventRegistrationsInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateCreateNestedManyWithoutUserInput
+  isVerification?: boolean
+  Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -1633,22 +1190,20 @@ export type UserUncheckedCreateWithoutEventRegistrationsInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationUncheckedCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateUncheckedCreateNestedManyWithoutUserInput
+  isVerification?: boolean
+  Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileUncheckedCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportUncheckedCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewUncheckedCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -1676,22 +1231,20 @@ export type UserUpdateWithoutEventRegistrationsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -1703,22 +1256,20 @@ export type UserUncheckedUpdateWithoutEventRegistrationsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUncheckedUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUncheckedUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUncheckedUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUncheckedUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUncheckedUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -1730,21 +1281,19 @@ export type UserCreateWithoutPostsInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateCreateNestedManyWithoutUserInput
+  isVerification?: boolean
+  Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
   notifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileCreateNestedManyWithoutUserInput
@@ -1757,21 +1306,19 @@ export type UserUncheckedCreateWithoutPostsInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationUncheckedCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateUncheckedCreateNestedManyWithoutUserInput
+  isVerification?: boolean
+  Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileUncheckedCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportUncheckedCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewUncheckedCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileUncheckedCreateNestedManyWithoutUserInput
@@ -1800,21 +1347,19 @@ export type UserUpdateWithoutPostsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
   notifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUpdateManyWithoutUserNestedInput
@@ -1827,21 +1372,19 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUncheckedUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUncheckedUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUncheckedUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUncheckedUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUncheckedUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUncheckedUpdateManyWithoutUserNestedInput
@@ -1854,22 +1397,20 @@ export type UserCreateWithoutMediaFilesInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateCreateNestedManyWithoutUserInput
+  isVerification?: boolean
+  Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -1881,22 +1422,20 @@ export type UserUncheckedCreateWithoutMediaFilesInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationUncheckedCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateUncheckedCreateNestedManyWithoutUserInput
+  isVerification?: boolean
+  Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileUncheckedCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportUncheckedCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewUncheckedCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -1924,22 +1463,20 @@ export type UserUpdateWithoutMediaFilesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -1951,22 +1488,20 @@ export type UserUncheckedUpdateWithoutMediaFilesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUncheckedUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUncheckedUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUncheckedUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUncheckedUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUncheckedUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -1978,22 +1513,20 @@ export type UserCreateWithoutSessionsInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateCreateNestedManyWithoutUserInput
+  isVerification?: boolean
+  Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileCreateNestedManyWithoutUserInput
@@ -2005,22 +1538,20 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationUncheckedCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateUncheckedCreateNestedManyWithoutUserInput
+  isVerification?: boolean
+  Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileUncheckedCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportUncheckedCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewUncheckedCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileUncheckedCreateNestedManyWithoutUserInput
@@ -2048,22 +1579,20 @@ export type UserUpdateWithoutSessionsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUpdateManyWithoutUserNestedInput
@@ -2075,22 +1604,20 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUncheckedUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUncheckedUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUncheckedUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUncheckedUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUncheckedUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUncheckedUpdateManyWithoutUserNestedInput
@@ -2102,21 +1629,19 @@ export type UserCreateWithoutRolesInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  donations?: Prisma.DonationCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateCreateNestedManyWithoutUserInput
+  isVerification?: boolean
+  Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileCreateNestedManyWithoutUserInput
@@ -2129,21 +1654,19 @@ export type UserUncheckedCreateWithoutRolesInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  donations?: Prisma.DonationUncheckedCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateUncheckedCreateNestedManyWithoutUserInput
+  isVerification?: boolean
+  Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileUncheckedCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportUncheckedCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewUncheckedCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileUncheckedCreateNestedManyWithoutUserInput
@@ -2172,21 +1695,19 @@ export type UserUpdateWithoutRolesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  donations?: Prisma.DonationUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUpdateManyWithoutUserNestedInput
@@ -2199,21 +1720,19 @@ export type UserUncheckedUpdateWithoutRolesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  donations?: Prisma.DonationUncheckedUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUncheckedUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUncheckedUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUncheckedUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUncheckedUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUncheckedUpdateManyWithoutUserNestedInput
@@ -2226,21 +1745,19 @@ export type UserCreateWithoutTrainerInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
+  isVerification?: boolean
+  Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
+  volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutUserInput
   enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
   lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateCreateNestedManyWithoutUserInput
-  volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileCreateNestedManyWithoutUserInput
@@ -2253,21 +1770,19 @@ export type UserUncheckedCreateWithoutTrainerInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
+  isVerification?: boolean
+  Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
+  volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationUncheckedCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutUserInput
   enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
   lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateUncheckedCreateNestedManyWithoutUserInput
-  volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileUncheckedCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportUncheckedCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewUncheckedCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileUncheckedCreateNestedManyWithoutUserInput
@@ -2296,21 +1811,19 @@ export type UserUpdateWithoutTrainerInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
+  volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutUserNestedInput
   enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
   lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUpdateManyWithoutUserNestedInput
-  volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUpdateManyWithoutUserNestedInput
@@ -2323,145 +1836,135 @@ export type UserUncheckedUpdateWithoutTrainerInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
+  volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUncheckedUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutUserNestedInput
   enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
   lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUncheckedUpdateManyWithoutUserNestedInput
-  volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUncheckedUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUncheckedUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUncheckedUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
 }
 
-export type UserCreateWithoutMemberProfileInput = {
+export type UserCreateWithoutMemberInput = {
   id?: string
   name: string
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateCreateNestedManyWithoutUserInput
+  isVerification?: boolean
+  Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   impactReports?: Prisma.ImpactReportCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
-export type UserUncheckedCreateWithoutMemberProfileInput = {
+export type UserUncheckedCreateWithoutMemberInput = {
   id?: string
   name: string
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationUncheckedCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateUncheckedCreateNestedManyWithoutUserInput
+  isVerification?: boolean
+  Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   impactReports?: Prisma.ImpactReportUncheckedCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewUncheckedCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
-export type UserCreateOrConnectWithoutMemberProfileInput = {
+export type UserCreateOrConnectWithoutMemberInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutMemberProfileInput, Prisma.UserUncheckedCreateWithoutMemberProfileInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMemberInput, Prisma.UserUncheckedCreateWithoutMemberInput>
 }
 
-export type UserUpsertWithoutMemberProfileInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutMemberProfileInput, Prisma.UserUncheckedUpdateWithoutMemberProfileInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutMemberProfileInput, Prisma.UserUncheckedCreateWithoutMemberProfileInput>
+export type UserUpsertWithoutMemberInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutMemberInput, Prisma.UserUncheckedUpdateWithoutMemberInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutMemberInput, Prisma.UserUncheckedCreateWithoutMemberInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutMemberProfileInput = {
+export type UserUpdateToOneWithWhereWithoutMemberInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutMemberProfileInput, Prisma.UserUncheckedUpdateWithoutMemberProfileInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutMemberInput, Prisma.UserUncheckedUpdateWithoutMemberInput>
 }
 
-export type UserUpdateWithoutMemberProfileInput = {
+export type UserUpdateWithoutMemberInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
-export type UserUncheckedUpdateWithoutMemberProfileInput = {
+export type UserUncheckedUpdateWithoutMemberInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUncheckedUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUncheckedUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUncheckedUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUncheckedUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUncheckedUpdateManyWithoutUserNestedInput
@@ -2474,21 +1977,19 @@ export type UserCreateWithoutNotificationsInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateCreateNestedManyWithoutUserInput
+  isVerification?: boolean
+  Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileCreateNestedManyWithoutUserInput
@@ -2501,21 +2002,19 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationUncheckedCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateUncheckedCreateNestedManyWithoutUserInput
+  isVerification?: boolean
+  Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileUncheckedCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportUncheckedCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewUncheckedCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileUncheckedCreateNestedManyWithoutUserInput
@@ -2544,21 +2043,19 @@ export type UserUpdateWithoutNotificationsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUpdateManyWithoutUserNestedInput
@@ -2571,21 +2068,19 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUncheckedUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUncheckedUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUncheckedUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUncheckedUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUncheckedUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUncheckedUpdateManyWithoutUserNestedInput
@@ -2598,21 +2093,19 @@ export type UserCreateWithoutAuditLogsInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateCreateNestedManyWithoutUserInput
+  isVerification?: boolean
+  Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileCreateNestedManyWithoutUserInput
@@ -2625,21 +2118,19 @@ export type UserUncheckedCreateWithoutAuditLogsInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationUncheckedCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateUncheckedCreateNestedManyWithoutUserInput
+  isVerification?: boolean
+  Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileUncheckedCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportUncheckedCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewUncheckedCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileUncheckedCreateNestedManyWithoutUserInput
@@ -2668,21 +2159,19 @@ export type UserUpdateWithoutAuditLogsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUpdateManyWithoutUserNestedInput
@@ -2695,21 +2184,19 @@ export type UserUncheckedUpdateWithoutAuditLogsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUncheckedUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUncheckedUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUncheckedUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUncheckedUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUncheckedUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUncheckedUpdateManyWithoutUserNestedInput
@@ -2722,21 +2209,19 @@ export type UserCreateWithoutVolunteerInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
+  isVerification?: boolean
+  Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
+  trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
   roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutUserInput
   enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
   lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateCreateNestedManyWithoutUserInput
-  trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileCreateNestedManyWithoutUserInput
@@ -2749,21 +2234,19 @@ export type UserUncheckedCreateWithoutVolunteerInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
+  isVerification?: boolean
+  Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
+  trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
   roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationUncheckedCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutUserInput
   enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
   lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateUncheckedCreateNestedManyWithoutUserInput
-  trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileUncheckedCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportUncheckedCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewUncheckedCreateNestedManyWithoutUserInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileUncheckedCreateNestedManyWithoutUserInput
@@ -2792,21 +2275,19 @@ export type UserUpdateWithoutVolunteerInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
+  trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
   roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutUserNestedInput
   enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
   lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUpdateManyWithoutUserNestedInput
-  trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUpdateManyWithoutUserNestedInput
@@ -2819,21 +2300,19 @@ export type UserUncheckedUpdateWithoutVolunteerInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
+  trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
   roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUncheckedUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutUserNestedInput
   enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
   lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUncheckedUpdateManyWithoutUserNestedInput
-  trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUncheckedUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUncheckedUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUncheckedUpdateManyWithoutUserNestedInput
   volunteerApplications?: Prisma.VolunteerApplicationUncheckedUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUncheckedUpdateManyWithoutUserNestedInput
@@ -2846,22 +2325,20 @@ export type UserCreateWithoutVolunteerApplicationsInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateCreateNestedManyWithoutUserInput
+  isVerification?: boolean
+  Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.EnrollmentCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutUserInput
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -2873,22 +2350,20 @@ export type UserUncheckedCreateWithoutVolunteerApplicationsInput = {
   email: string
   password: string
   phone?: string | null
-  status?: string
+  status?: $Enums.UserStatus
   createdAt?: Date | string
-  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
-  donations?: Prisma.DonationUncheckedCreateNestedManyWithoutUserInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutUserInput
-  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
-  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
-  certificates?: Prisma.CertificateUncheckedCreateNestedManyWithoutUserInput
+  isVerification?: boolean
+  Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
+  roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
+  enrollments?: Prisma.EnrollmentUncheckedCreateNestedManyWithoutUserInput
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutUserInput
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   notifications?: Prisma.UserNotificationUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
-  memberProfile?: Prisma.MemberProfileUncheckedCreateNestedOneWithoutUserInput
+  member?: Prisma.MemberUncheckedCreateNestedOneWithoutUserInput
   impactReports?: Prisma.ImpactReportUncheckedCreateNestedManyWithoutDonorInput
-  courseReviews?: Prisma.CourseReviewUncheckedCreateNestedManyWithoutUserInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedCreateNestedManyWithoutUserInput
   mediaFiles?: Prisma.MediaFileUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -2916,22 +2391,20 @@ export type UserUpdateWithoutVolunteerApplicationsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.EnrollmentUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -2943,22 +2416,20 @@ export type UserUncheckedUpdateWithoutVolunteerApplicationsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
-  donations?: Prisma.DonationUncheckedUpdateManyWithoutUserNestedInput
-  recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutUserNestedInput
-  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
-  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
-  certificates?: Prisma.CertificateUncheckedUpdateManyWithoutUserNestedInput
+  isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
+  roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
+  enrollments?: Prisma.EnrollmentUncheckedUpdateManyWithoutUserNestedInput
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutUserNestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   notifications?: Prisma.UserNotificationUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
-  memberProfile?: Prisma.MemberProfileUncheckedUpdateOneWithoutUserNestedInput
+  member?: Prisma.MemberUncheckedUpdateOneWithoutUserNestedInput
   impactReports?: Prisma.ImpactReportUncheckedUpdateManyWithoutDonorNestedInput
-  courseReviews?: Prisma.CourseReviewUncheckedUpdateManyWithoutUserNestedInput
   eventRegistrations?: Prisma.EventRegistrationUncheckedUpdateManyWithoutUserNestedInput
   mediaFiles?: Prisma.MediaFileUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -2971,16 +2442,12 @@ export type UserUncheckedUpdateWithoutVolunteerApplicationsInput = {
 
 export type UserCountOutputType = {
   roles: number
-  donations: number
-  recurringDonations: number
   enrollments: number
   lessonProgress: number
-  certificates: number
   posts: number
   notifications: number
   auditLogs: number
   impactReports: number
-  courseReviews: number
   volunteerApplications: number
   eventRegistrations: number
   mediaFiles: number
@@ -2989,16 +2456,12 @@ export type UserCountOutputType = {
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   roles?: boolean | UserCountOutputTypeCountRolesArgs
-  donations?: boolean | UserCountOutputTypeCountDonationsArgs
-  recurringDonations?: boolean | UserCountOutputTypeCountRecurringDonationsArgs
   enrollments?: boolean | UserCountOutputTypeCountEnrollmentsArgs
   lessonProgress?: boolean | UserCountOutputTypeCountLessonProgressArgs
-  certificates?: boolean | UserCountOutputTypeCountCertificatesArgs
   posts?: boolean | UserCountOutputTypeCountPostsArgs
   notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
   auditLogs?: boolean | UserCountOutputTypeCountAuditLogsArgs
   impactReports?: boolean | UserCountOutputTypeCountImpactReportsArgs
-  courseReviews?: boolean | UserCountOutputTypeCountCourseReviewsArgs
   volunteerApplications?: boolean | UserCountOutputTypeCountVolunteerApplicationsArgs
   eventRegistrations?: boolean | UserCountOutputTypeCountEventRegistrationsArgs
   mediaFiles?: boolean | UserCountOutputTypeCountMediaFilesArgs
@@ -3025,20 +2488,6 @@ export type UserCountOutputTypeCountRolesArgs<ExtArgs extends runtime.Types.Exte
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountDonationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.DonationWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountRecurringDonationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.RecurringDonationWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
 export type UserCountOutputTypeCountEnrollmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.EnrollmentWhereInput
 }
@@ -3048,13 +2497,6 @@ export type UserCountOutputTypeCountEnrollmentsArgs<ExtArgs extends runtime.Type
  */
 export type UserCountOutputTypeCountLessonProgressArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.LessonProgressWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountCertificatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.CertificateWhereInput
 }
 
 /**
@@ -3083,13 +2525,6 @@ export type UserCountOutputTypeCountAuditLogsArgs<ExtArgs extends runtime.Types.
  */
 export type UserCountOutputTypeCountImpactReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.ImpactReportWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountCourseReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.CourseReviewWhereInput
 }
 
 /**
@@ -3129,20 +2564,18 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   phone?: boolean
   status?: boolean
   createdAt?: boolean
-  roles?: boolean | Prisma.User$rolesArgs<ExtArgs>
-  donations?: boolean | Prisma.User$donationsArgs<ExtArgs>
-  recurringDonations?: boolean | Prisma.User$recurringDonationsArgs<ExtArgs>
-  enrollments?: boolean | Prisma.User$enrollmentsArgs<ExtArgs>
-  lessonProgress?: boolean | Prisma.User$lessonProgressArgs<ExtArgs>
-  certificates?: boolean | Prisma.User$certificatesArgs<ExtArgs>
+  isVerification?: boolean
+  Donor?: boolean | Prisma.User$DonorArgs<ExtArgs>
   volunteer?: boolean | Prisma.User$volunteerArgs<ExtArgs>
   trainer?: boolean | Prisma.User$trainerArgs<ExtArgs>
+  roles?: boolean | Prisma.User$rolesArgs<ExtArgs>
+  enrollments?: boolean | Prisma.User$enrollmentsArgs<ExtArgs>
+  lessonProgress?: boolean | Prisma.User$lessonProgressArgs<ExtArgs>
   posts?: boolean | Prisma.User$postsArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
-  memberProfile?: boolean | Prisma.User$memberProfileArgs<ExtArgs>
+  member?: boolean | Prisma.User$memberArgs<ExtArgs>
   impactReports?: boolean | Prisma.User$impactReportsArgs<ExtArgs>
-  courseReviews?: boolean | Prisma.User$courseReviewsArgs<ExtArgs>
   volunteerApplications?: boolean | Prisma.User$volunteerApplicationsArgs<ExtArgs>
   eventRegistrations?: boolean | Prisma.User$eventRegistrationsArgs<ExtArgs>
   mediaFiles?: boolean | Prisma.User$mediaFilesArgs<ExtArgs>
@@ -3158,6 +2591,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   phone?: boolean
   status?: boolean
   createdAt?: boolean
+  isVerification?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -3168,6 +2602,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   phone?: boolean
   status?: boolean
   createdAt?: boolean
+  isVerification?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -3178,24 +2613,22 @@ export type UserSelectScalar = {
   phone?: boolean
   status?: boolean
   createdAt?: boolean
+  isVerification?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "phone" | "status" | "createdAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "phone" | "status" | "createdAt" | "isVerification", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  roles?: boolean | Prisma.User$rolesArgs<ExtArgs>
-  donations?: boolean | Prisma.User$donationsArgs<ExtArgs>
-  recurringDonations?: boolean | Prisma.User$recurringDonationsArgs<ExtArgs>
-  enrollments?: boolean | Prisma.User$enrollmentsArgs<ExtArgs>
-  lessonProgress?: boolean | Prisma.User$lessonProgressArgs<ExtArgs>
-  certificates?: boolean | Prisma.User$certificatesArgs<ExtArgs>
+  Donor?: boolean | Prisma.User$DonorArgs<ExtArgs>
   volunteer?: boolean | Prisma.User$volunteerArgs<ExtArgs>
   trainer?: boolean | Prisma.User$trainerArgs<ExtArgs>
+  roles?: boolean | Prisma.User$rolesArgs<ExtArgs>
+  enrollments?: boolean | Prisma.User$enrollmentsArgs<ExtArgs>
+  lessonProgress?: boolean | Prisma.User$lessonProgressArgs<ExtArgs>
   posts?: boolean | Prisma.User$postsArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
-  memberProfile?: boolean | Prisma.User$memberProfileArgs<ExtArgs>
+  member?: boolean | Prisma.User$memberArgs<ExtArgs>
   impactReports?: boolean | Prisma.User$impactReportsArgs<ExtArgs>
-  courseReviews?: boolean | Prisma.User$courseReviewsArgs<ExtArgs>
   volunteerApplications?: boolean | Prisma.User$volunteerApplicationsArgs<ExtArgs>
   eventRegistrations?: boolean | Prisma.User$eventRegistrationsArgs<ExtArgs>
   mediaFiles?: boolean | Prisma.User$mediaFilesArgs<ExtArgs>
@@ -3208,20 +2641,17 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
-    roles: Prisma.$UserRolePayload<ExtArgs>[]
-    donations: Prisma.$DonationPayload<ExtArgs>[]
-    recurringDonations: Prisma.$RecurringDonationPayload<ExtArgs>[]
-    enrollments: Prisma.$EnrollmentPayload<ExtArgs>[]
-    lessonProgress: Prisma.$LessonProgressPayload<ExtArgs>[]
-    certificates: Prisma.$CertificatePayload<ExtArgs>[]
+    Donor: Prisma.$DonorPayload<ExtArgs> | null
     volunteer: Prisma.$VolunteerPayload<ExtArgs> | null
     trainer: Prisma.$TrainerPayload<ExtArgs> | null
+    roles: Prisma.$UserRolePayload<ExtArgs>[]
+    enrollments: Prisma.$EnrollmentPayload<ExtArgs>[]
+    lessonProgress: Prisma.$LessonProgressPayload<ExtArgs>[]
     posts: Prisma.$PostPayload<ExtArgs>[]
     notifications: Prisma.$UserNotificationPayload<ExtArgs>[]
     auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
-    memberProfile: Prisma.$MemberProfilePayload<ExtArgs> | null
+    member: Prisma.$MemberPayload<ExtArgs> | null
     impactReports: Prisma.$ImpactReportPayload<ExtArgs>[]
-    courseReviews: Prisma.$CourseReviewPayload<ExtArgs>[]
     volunteerApplications: Prisma.$VolunteerApplicationPayload<ExtArgs>[]
     eventRegistrations: Prisma.$EventRegistrationPayload<ExtArgs>[]
     mediaFiles: Prisma.$MediaFilePayload<ExtArgs>[]
@@ -3233,8 +2663,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     email: string
     password: string
     phone: string | null
-    status: string
+    status: $Enums.UserStatus
     createdAt: Date
+    isVerification: boolean
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -3629,20 +3060,17 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  roles<T extends Prisma.User$rolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  donations<T extends Prisma.User$donationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$donationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DonationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  recurringDonations<T extends Prisma.User$recurringDonationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$recurringDonationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RecurringDonationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  enrollments<T extends Prisma.User$enrollmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$enrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EnrollmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  lessonProgress<T extends Prisma.User$lessonProgressArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$lessonProgressArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LessonProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  certificates<T extends Prisma.User$certificatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$certificatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CertificatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Donor<T extends Prisma.User$DonorArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$DonorArgs<ExtArgs>>): Prisma.Prisma__DonorClient<runtime.Types.Result.GetResult<Prisma.$DonorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   volunteer<T extends Prisma.User$volunteerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$volunteerArgs<ExtArgs>>): Prisma.Prisma__VolunteerClient<runtime.Types.Result.GetResult<Prisma.$VolunteerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   trainer<T extends Prisma.User$trainerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$trainerArgs<ExtArgs>>): Prisma.Prisma__TrainerClient<runtime.Types.Result.GetResult<Prisma.$TrainerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  roles<T extends Prisma.User$rolesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  enrollments<T extends Prisma.User$enrollmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$enrollmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EnrollmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  lessonProgress<T extends Prisma.User$lessonProgressArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$lessonProgressArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LessonProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   posts<T extends Prisma.User$postsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notifications<T extends Prisma.User$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserNotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   auditLogs<T extends Prisma.User$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  memberProfile<T extends Prisma.User$memberProfileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$memberProfileArgs<ExtArgs>>): Prisma.Prisma__MemberProfileClient<runtime.Types.Result.GetResult<Prisma.$MemberProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  member<T extends Prisma.User$memberArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$memberArgs<ExtArgs>>): Prisma.Prisma__MemberClient<runtime.Types.Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   impactReports<T extends Prisma.User$impactReportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$impactReportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ImpactReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  courseReviews<T extends Prisma.User$courseReviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$courseReviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CourseReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   volunteerApplications<T extends Prisma.User$volunteerApplicationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$volunteerApplicationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$VolunteerApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   eventRegistrations<T extends Prisma.User$eventRegistrationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$eventRegistrationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EventRegistrationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   mediaFiles<T extends Prisma.User$mediaFilesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$mediaFilesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MediaFilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -3681,8 +3109,9 @@ export interface UserFieldRefs {
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly password: Prisma.FieldRef<"User", 'String'>
   readonly phone: Prisma.FieldRef<"User", 'String'>
-  readonly status: Prisma.FieldRef<"User", 'String'>
+  readonly status: Prisma.FieldRef<"User", 'UserStatus'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly isVerification: Prisma.FieldRef<"User", 'Boolean'>
 }
     
 
@@ -4071,6 +3500,63 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
+ * User.Donor
+ */
+export type User$DonorArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Donor
+   */
+  select?: Prisma.DonorSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Donor
+   */
+  omit?: Prisma.DonorOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DonorInclude<ExtArgs> | null
+  where?: Prisma.DonorWhereInput
+}
+
+/**
+ * User.volunteer
+ */
+export type User$volunteerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Volunteer
+   */
+  select?: Prisma.VolunteerSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Volunteer
+   */
+  omit?: Prisma.VolunteerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.VolunteerInclude<ExtArgs> | null
+  where?: Prisma.VolunteerWhereInput
+}
+
+/**
+ * User.trainer
+ */
+export type User$trainerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Trainer
+   */
+  select?: Prisma.TrainerSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Trainer
+   */
+  omit?: Prisma.TrainerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TrainerInclude<ExtArgs> | null
+  where?: Prisma.TrainerWhereInput
+}
+
+/**
  * User.roles
  */
 export type User$rolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -4092,54 +3578,6 @@ export type User$rolesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
   take?: number
   skip?: number
   distinct?: Prisma.UserRoleScalarFieldEnum | Prisma.UserRoleScalarFieldEnum[]
-}
-
-/**
- * User.donations
- */
-export type User$donationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Donation
-   */
-  select?: Prisma.DonationSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Donation
-   */
-  omit?: Prisma.DonationOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.DonationInclude<ExtArgs> | null
-  where?: Prisma.DonationWhereInput
-  orderBy?: Prisma.DonationOrderByWithRelationInput | Prisma.DonationOrderByWithRelationInput[]
-  cursor?: Prisma.DonationWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.DonationScalarFieldEnum | Prisma.DonationScalarFieldEnum[]
-}
-
-/**
- * User.recurringDonations
- */
-export type User$recurringDonationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the RecurringDonation
-   */
-  select?: Prisma.RecurringDonationSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the RecurringDonation
-   */
-  omit?: Prisma.RecurringDonationOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.RecurringDonationInclude<ExtArgs> | null
-  where?: Prisma.RecurringDonationWhereInput
-  orderBy?: Prisma.RecurringDonationOrderByWithRelationInput | Prisma.RecurringDonationOrderByWithRelationInput[]
-  cursor?: Prisma.RecurringDonationWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.RecurringDonationScalarFieldEnum | Prisma.RecurringDonationScalarFieldEnum[]
 }
 
 /**
@@ -4188,68 +3626,6 @@ export type User$lessonProgressArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.LessonProgressScalarFieldEnum | Prisma.LessonProgressScalarFieldEnum[]
-}
-
-/**
- * User.certificates
- */
-export type User$certificatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Certificate
-   */
-  select?: Prisma.CertificateSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Certificate
-   */
-  omit?: Prisma.CertificateOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CertificateInclude<ExtArgs> | null
-  where?: Prisma.CertificateWhereInput
-  orderBy?: Prisma.CertificateOrderByWithRelationInput | Prisma.CertificateOrderByWithRelationInput[]
-  cursor?: Prisma.CertificateWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.CertificateScalarFieldEnum | Prisma.CertificateScalarFieldEnum[]
-}
-
-/**
- * User.volunteer
- */
-export type User$volunteerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Volunteer
-   */
-  select?: Prisma.VolunteerSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Volunteer
-   */
-  omit?: Prisma.VolunteerOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.VolunteerInclude<ExtArgs> | null
-  where?: Prisma.VolunteerWhereInput
-}
-
-/**
- * User.trainer
- */
-export type User$trainerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Trainer
-   */
-  select?: Prisma.TrainerSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Trainer
-   */
-  omit?: Prisma.TrainerOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.TrainerInclude<ExtArgs> | null
-  where?: Prisma.TrainerWhereInput
 }
 
 /**
@@ -4325,22 +3701,22 @@ export type User$auditLogsArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * User.memberProfile
+ * User.member
  */
-export type User$memberProfileArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$memberArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the MemberProfile
+   * Select specific fields to fetch from the Member
    */
-  select?: Prisma.MemberProfileSelect<ExtArgs> | null
+  select?: Prisma.MemberSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the MemberProfile
+   * Omit specific fields from the Member
    */
-  omit?: Prisma.MemberProfileOmit<ExtArgs> | null
+  omit?: Prisma.MemberOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.MemberProfileInclude<ExtArgs> | null
-  where?: Prisma.MemberProfileWhereInput
+  include?: Prisma.MemberInclude<ExtArgs> | null
+  where?: Prisma.MemberWhereInput
 }
 
 /**
@@ -4365,30 +3741,6 @@ export type User$impactReportsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.ImpactReportScalarFieldEnum | Prisma.ImpactReportScalarFieldEnum[]
-}
-
-/**
- * User.courseReviews
- */
-export type User$courseReviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the CourseReview
-   */
-  select?: Prisma.CourseReviewSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the CourseReview
-   */
-  omit?: Prisma.CourseReviewOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CourseReviewInclude<ExtArgs> | null
-  where?: Prisma.CourseReviewWhereInput
-  orderBy?: Prisma.CourseReviewOrderByWithRelationInput | Prisma.CourseReviewOrderByWithRelationInput[]
-  cursor?: Prisma.CourseReviewWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.CourseReviewScalarFieldEnum | Prisma.CourseReviewScalarFieldEnum[]
 }
 
 /**

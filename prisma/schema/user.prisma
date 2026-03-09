@@ -1,33 +1,33 @@
 model User {
-    id        String   @id @default(uuid())
-    name      String
-    email     String   @unique
-    password  String
-    phone     String?
-    status    String   @default("active")
-    createdAt DateTime @default(now())
+    id             String     @id @default(uuid())
+    name           String
+    email          String     @unique
+    password       String
+    phone          String?
+    status         UserStatus @default(active)
+    createdAt      DateTime   @default(now())
+    isVerification Boolean    @default(false)
+
+    Donor     Donor?
+    volunteer Volunteer?
+    trainer   Trainer?
 
     roles                 UserRole[]
-    donations             Donation[]
-    recurringDonations    RecurringDonation[]
     enrollments           Enrollment[]
     lessonProgress        LessonProgress[]
-    certificates          Certificate[]
-    volunteer             Volunteer?
-    trainer               Trainer?
     posts                 Post[]
     notifications         UserNotification[]
     auditLogs             AuditLog[]
-    memberProfile         MemberProfile?
+    member                Member?
     impactReports         ImpactReport[]
-    courseReviews         CourseReview[]
+    // courseReviews         CourseReview[]
     volunteerApplications VolunteerApplication[]
     eventRegistrations    EventRegistration[]
     mediaFiles            MediaFile[]
     sessions              Session[]
 }
 
-model MemberProfile {
+model Member {
     id         String   @id @default(uuid())
     userId     String   @unique
     address    String?
@@ -57,4 +57,3 @@ model AuditLog {
 
     user User @relation(fields: [userId], references: [id])
 }
-
