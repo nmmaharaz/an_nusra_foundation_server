@@ -123,7 +123,9 @@ export type CampaignScalarFieldEnum = (typeof CampaignScalarFieldEnum)[keyof typ
 
 export const CampaignCategoryScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type CampaignCategoryScalarFieldEnum = (typeof CampaignCategoryScalarFieldEnum)[keyof typeof CampaignCategoryScalarFieldEnum]
@@ -411,8 +413,9 @@ export const UserScalarFieldEnum = {
   password: 'password',
   phone: 'phone',
   status: 'status',
+  isVerification: 'isVerification',
   createdAt: 'createdAt',
-  isVerification: 'isVerification'
+  updatedAt: 'updatedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]

@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { CompaignCategoriesRoute } from "../module/campaign-categories/campaign-categories.route";
+import { CampaignCategoriesRoute } from "../module/campaign-categories/campaign-categories.route";
 
 export const router = Router()
 
 const moduleRoutes = [
     {
         path: "/campaign-categories",
-        route: CompaignCategoriesRoute
+        route: CampaignCategoriesRoute
     }
 ]
 

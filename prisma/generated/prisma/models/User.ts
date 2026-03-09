@@ -31,8 +31,9 @@ export type UserMinAggregateOutputType = {
   password: string | null
   phone: string | null
   status: $Enums.UserStatus | null
-  createdAt: Date | null
   isVerification: boolean | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -42,8 +43,9 @@ export type UserMaxAggregateOutputType = {
   password: string | null
   phone: string | null
   status: $Enums.UserStatus | null
-  createdAt: Date | null
   isVerification: boolean | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -53,8 +55,9 @@ export type UserCountAggregateOutputType = {
   password: number
   phone: number
   status: number
-  createdAt: number
   isVerification: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -66,8 +69,9 @@ export type UserMinAggregateInputType = {
   password?: true
   phone?: true
   status?: true
-  createdAt?: true
   isVerification?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -77,8 +81,9 @@ export type UserMaxAggregateInputType = {
   password?: true
   phone?: true
   status?: true
-  createdAt?: true
   isVerification?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -88,8 +93,9 @@ export type UserCountAggregateInputType = {
   password?: true
   phone?: true
   status?: true
-  createdAt?: true
   isVerification?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -172,8 +178,9 @@ export type UserGroupByOutputType = {
   password: string
   phone: string | null
   status: $Enums.UserStatus
-  createdAt: Date
   isVerification: boolean
+  createdAt: Date
+  updatedAt: Date
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -204,8 +211,9 @@ export type UserWhereInput = {
   password?: Prisma.StringFilter<"User"> | string
   phone?: Prisma.StringNullableFilter<"User"> | string | null
   status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   isVerification?: Prisma.BoolFilter<"User"> | boolean
+  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   Donor?: Prisma.XOR<Prisma.DonorNullableScalarRelationFilter, Prisma.DonorWhereInput> | null
   volunteer?: Prisma.XOR<Prisma.VolunteerNullableScalarRelationFilter, Prisma.VolunteerWhereInput> | null
   trainer?: Prisma.XOR<Prisma.TrainerNullableScalarRelationFilter, Prisma.TrainerWhereInput> | null
@@ -230,8 +238,9 @@ export type UserOrderByWithRelationInput = {
   password?: Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
   isVerification?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   Donor?: Prisma.DonorOrderByWithRelationInput
   volunteer?: Prisma.VolunteerOrderByWithRelationInput
   trainer?: Prisma.TrainerOrderByWithRelationInput
@@ -259,8 +268,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   password?: Prisma.StringFilter<"User"> | string
   phone?: Prisma.StringNullableFilter<"User"> | string | null
   status?: Prisma.EnumUserStatusFilter<"User"> | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   isVerification?: Prisma.BoolFilter<"User"> | boolean
+  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   Donor?: Prisma.XOR<Prisma.DonorNullableScalarRelationFilter, Prisma.DonorWhereInput> | null
   volunteer?: Prisma.XOR<Prisma.VolunteerNullableScalarRelationFilter, Prisma.VolunteerWhereInput> | null
   trainer?: Prisma.XOR<Prisma.TrainerNullableScalarRelationFilter, Prisma.TrainerWhereInput> | null
@@ -285,8 +295,9 @@ export type UserOrderByWithAggregationInput = {
   password?: Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
   isVerification?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -302,8 +313,9 @@ export type UserScalarWhereWithAggregatesInput = {
   password?: Prisma.StringWithAggregatesFilter<"User"> | string
   phone?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   status?: Prisma.EnumUserStatusWithAggregatesFilter<"User"> | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   isVerification?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
 
 export type UserCreateInput = {
@@ -313,8 +325,9 @@ export type UserCreateInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
@@ -339,8 +352,9 @@ export type UserUncheckedCreateInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
@@ -365,8 +379,9 @@ export type UserUpdateInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
@@ -391,8 +406,9 @@ export type UserUncheckedUpdateInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
@@ -417,8 +433,9 @@ export type UserCreateManyInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type UserUpdateManyMutationInput = {
@@ -428,8 +445,9 @@ export type UserUpdateManyMutationInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -439,8 +457,9 @@ export type UserUncheckedUpdateManyInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserScalarRelationFilter = {
@@ -455,8 +474,9 @@ export type UserCountOrderByAggregateInput = {
   password?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
   isVerification?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -466,8 +486,9 @@ export type UserMaxOrderByAggregateInput = {
   password?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
   isVerification?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -477,8 +498,9 @@ export type UserMinOrderByAggregateInput = {
   password?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
   isVerification?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type UserCreateNestedOneWithoutEnrollmentsInput = {
@@ -702,8 +724,9 @@ export type UserCreateWithoutEnrollmentsInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
@@ -727,8 +750,9 @@ export type UserUncheckedCreateWithoutEnrollmentsInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
@@ -768,8 +792,9 @@ export type UserUpdateWithoutEnrollmentsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
@@ -793,8 +818,9 @@ export type UserUncheckedUpdateWithoutEnrollmentsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
@@ -818,8 +844,9 @@ export type UserCreateWithoutLessonProgressInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
@@ -843,8 +870,9 @@ export type UserUncheckedCreateWithoutLessonProgressInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
@@ -884,8 +912,9 @@ export type UserUpdateWithoutLessonProgressInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
@@ -909,8 +938,9 @@ export type UserUncheckedUpdateWithoutLessonProgressInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
@@ -934,8 +964,9 @@ export type UserCreateWithoutDonorInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
   roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
@@ -959,8 +990,9 @@ export type UserUncheckedCreateWithoutDonorInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
   roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
@@ -1000,8 +1032,9 @@ export type UserUpdateWithoutDonorInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
   roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
@@ -1025,8 +1058,9 @@ export type UserUncheckedUpdateWithoutDonorInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
   roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
@@ -1050,8 +1084,9 @@ export type UserCreateWithoutImpactReportsInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
@@ -1075,8 +1110,9 @@ export type UserUncheckedCreateWithoutImpactReportsInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
@@ -1116,8 +1152,9 @@ export type UserUpdateWithoutImpactReportsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
@@ -1141,8 +1178,9 @@ export type UserUncheckedUpdateWithoutImpactReportsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
@@ -1166,8 +1204,9 @@ export type UserCreateWithoutEventRegistrationsInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
@@ -1191,8 +1230,9 @@ export type UserUncheckedCreateWithoutEventRegistrationsInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
@@ -1232,8 +1272,9 @@ export type UserUpdateWithoutEventRegistrationsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
@@ -1257,8 +1298,9 @@ export type UserUncheckedUpdateWithoutEventRegistrationsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
@@ -1282,8 +1324,9 @@ export type UserCreateWithoutPostsInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
@@ -1307,8 +1350,9 @@ export type UserUncheckedCreateWithoutPostsInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
@@ -1348,8 +1392,9 @@ export type UserUpdateWithoutPostsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
@@ -1373,8 +1418,9 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
@@ -1398,8 +1444,9 @@ export type UserCreateWithoutMediaFilesInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
@@ -1423,8 +1470,9 @@ export type UserUncheckedCreateWithoutMediaFilesInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
@@ -1464,8 +1512,9 @@ export type UserUpdateWithoutMediaFilesInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
@@ -1489,8 +1538,9 @@ export type UserUncheckedUpdateWithoutMediaFilesInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
@@ -1514,8 +1564,9 @@ export type UserCreateWithoutSessionsInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
@@ -1539,8 +1590,9 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
@@ -1580,8 +1632,9 @@ export type UserUpdateWithoutSessionsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
@@ -1605,8 +1658,9 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
@@ -1630,8 +1684,9 @@ export type UserCreateWithoutRolesInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
@@ -1655,8 +1710,9 @@ export type UserUncheckedCreateWithoutRolesInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
@@ -1696,8 +1752,9 @@ export type UserUpdateWithoutRolesInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
@@ -1721,8 +1778,9 @@ export type UserUncheckedUpdateWithoutRolesInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
@@ -1746,8 +1804,9 @@ export type UserCreateWithoutTrainerInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
@@ -1771,8 +1830,9 @@ export type UserUncheckedCreateWithoutTrainerInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
@@ -1812,8 +1872,9 @@ export type UserUpdateWithoutTrainerInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
@@ -1837,8 +1898,9 @@ export type UserUncheckedUpdateWithoutTrainerInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
@@ -1862,8 +1924,9 @@ export type UserCreateWithoutMemberInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
@@ -1887,8 +1950,9 @@ export type UserUncheckedCreateWithoutMemberInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
@@ -1928,8 +1992,9 @@ export type UserUpdateWithoutMemberInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
@@ -1953,8 +2018,9 @@ export type UserUncheckedUpdateWithoutMemberInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
@@ -1978,8 +2044,9 @@ export type UserCreateWithoutNotificationsInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
@@ -2003,8 +2070,9 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
@@ -2044,8 +2112,9 @@ export type UserUpdateWithoutNotificationsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
@@ -2069,8 +2138,9 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
@@ -2094,8 +2164,9 @@ export type UserCreateWithoutAuditLogsInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
@@ -2119,8 +2190,9 @@ export type UserUncheckedCreateWithoutAuditLogsInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
@@ -2160,8 +2232,9 @@ export type UserUpdateWithoutAuditLogsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
@@ -2185,8 +2258,9 @@ export type UserUncheckedUpdateWithoutAuditLogsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
@@ -2210,8 +2284,9 @@ export type UserCreateWithoutVolunteerInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
   roles?: Prisma.UserRoleCreateNestedManyWithoutUserInput
@@ -2235,8 +2310,9 @@ export type UserUncheckedCreateWithoutVolunteerInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
   roles?: Prisma.UserRoleUncheckedCreateNestedManyWithoutUserInput
@@ -2276,8 +2352,9 @@ export type UserUpdateWithoutVolunteerInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
   roles?: Prisma.UserRoleUpdateManyWithoutUserNestedInput
@@ -2301,8 +2378,9 @@ export type UserUncheckedUpdateWithoutVolunteerInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
   roles?: Prisma.UserRoleUncheckedUpdateManyWithoutUserNestedInput
@@ -2326,8 +2404,9 @@ export type UserCreateWithoutVolunteerApplicationsInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerCreateNestedOneWithoutUserInput
@@ -2351,8 +2430,9 @@ export type UserUncheckedCreateWithoutVolunteerApplicationsInput = {
   password: string
   phone?: string | null
   status?: $Enums.UserStatus
-  createdAt?: Date | string
   isVerification?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
   Donor?: Prisma.DonorUncheckedCreateNestedOneWithoutUserInput
   volunteer?: Prisma.VolunteerUncheckedCreateNestedOneWithoutUserInput
   trainer?: Prisma.TrainerUncheckedCreateNestedOneWithoutUserInput
@@ -2392,8 +2472,9 @@ export type UserUpdateWithoutVolunteerApplicationsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUpdateOneWithoutUserNestedInput
@@ -2417,8 +2498,9 @@ export type UserUncheckedUpdateWithoutVolunteerApplicationsInput = {
   password?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   isVerification?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   Donor?: Prisma.DonorUncheckedUpdateOneWithoutUserNestedInput
   volunteer?: Prisma.VolunteerUncheckedUpdateOneWithoutUserNestedInput
   trainer?: Prisma.TrainerUncheckedUpdateOneWithoutUserNestedInput
@@ -2563,8 +2645,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   password?: boolean
   phone?: boolean
   status?: boolean
-  createdAt?: boolean
   isVerification?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   Donor?: boolean | Prisma.User$DonorArgs<ExtArgs>
   volunteer?: boolean | Prisma.User$volunteerArgs<ExtArgs>
   trainer?: boolean | Prisma.User$trainerArgs<ExtArgs>
@@ -2590,8 +2673,9 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   password?: boolean
   phone?: boolean
   status?: boolean
-  createdAt?: boolean
   isVerification?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2601,8 +2685,9 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   password?: boolean
   phone?: boolean
   status?: boolean
-  createdAt?: boolean
   isVerification?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -2612,11 +2697,12 @@ export type UserSelectScalar = {
   password?: boolean
   phone?: boolean
   status?: boolean
-  createdAt?: boolean
   isVerification?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "phone" | "status" | "createdAt" | "isVerification", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "phone" | "status" | "isVerification" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Donor?: boolean | Prisma.User$DonorArgs<ExtArgs>
   volunteer?: boolean | Prisma.User$volunteerArgs<ExtArgs>
@@ -2664,8 +2750,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     password: string
     phone: string | null
     status: $Enums.UserStatus
-    createdAt: Date
     isVerification: boolean
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -3110,8 +3197,9 @@ export interface UserFieldRefs {
   readonly password: Prisma.FieldRef<"User", 'String'>
   readonly phone: Prisma.FieldRef<"User", 'String'>
   readonly status: Prisma.FieldRef<"User", 'UserStatus'>
-  readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly isVerification: Prisma.FieldRef<"User", 'Boolean'>
+  readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
     
 

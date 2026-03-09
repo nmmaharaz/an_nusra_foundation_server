@@ -27,16 +27,22 @@ export type AggregateCampaignCategory = {
 export type CampaignCategoryMinAggregateOutputType = {
   id: string | null
   name: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type CampaignCategoryMaxAggregateOutputType = {
   id: string | null
   name: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type CampaignCategoryCountAggregateOutputType = {
   id: number
   name: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -44,16 +50,22 @@ export type CampaignCategoryCountAggregateOutputType = {
 export type CampaignCategoryMinAggregateInputType = {
   id?: true
   name?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type CampaignCategoryMaxAggregateInputType = {
   id?: true
   name?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type CampaignCategoryCountAggregateInputType = {
   id?: true
   name?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -132,6 +144,8 @@ export type CampaignCategoryGroupByArgs<ExtArgs extends runtime.Types.Extensions
 export type CampaignCategoryGroupByOutputType = {
   id: string
   name: string
+  createdAt: Date
+  updatedAt: Date
   _count: CampaignCategoryCountAggregateOutputType | null
   _min: CampaignCategoryMinAggregateOutputType | null
   _max: CampaignCategoryMaxAggregateOutputType | null
@@ -158,12 +172,16 @@ export type CampaignCategoryWhereInput = {
   NOT?: Prisma.CampaignCategoryWhereInput | Prisma.CampaignCategoryWhereInput[]
   id?: Prisma.StringFilter<"CampaignCategory"> | string
   name?: Prisma.StringFilter<"CampaignCategory"> | string
+  createdAt?: Prisma.DateTimeFilter<"CampaignCategory"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"CampaignCategory"> | Date | string
   campaigns?: Prisma.CampaignListRelationFilter
 }
 
 export type CampaignCategoryOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   campaigns?: Prisma.CampaignOrderByRelationAggregateInput
 }
 
@@ -173,12 +191,16 @@ export type CampaignCategoryWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.CampaignCategoryWhereInput[]
   NOT?: Prisma.CampaignCategoryWhereInput | Prisma.CampaignCategoryWhereInput[]
   name?: Prisma.StringFilter<"CampaignCategory"> | string
+  createdAt?: Prisma.DateTimeFilter<"CampaignCategory"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"CampaignCategory"> | Date | string
   campaigns?: Prisma.CampaignListRelationFilter
 }, "id">
 
 export type CampaignCategoryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.CampaignCategoryCountOrderByAggregateInput
   _max?: Prisma.CampaignCategoryMaxOrderByAggregateInput
   _min?: Prisma.CampaignCategoryMinOrderByAggregateInput
@@ -190,45 +212,61 @@ export type CampaignCategoryScalarWhereWithAggregatesInput = {
   NOT?: Prisma.CampaignCategoryScalarWhereWithAggregatesInput | Prisma.CampaignCategoryScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"CampaignCategory"> | string
   name?: Prisma.StringWithAggregatesFilter<"CampaignCategory"> | string
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"CampaignCategory"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"CampaignCategory"> | Date | string
 }
 
 export type CampaignCategoryCreateInput = {
   id?: string
   name: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   campaigns?: Prisma.CampaignCreateNestedManyWithoutCampaignCategoryInput
 }
 
 export type CampaignCategoryUncheckedCreateInput = {
   id?: string
   name: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutCampaignCategoryInput
 }
 
 export type CampaignCategoryUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   campaigns?: Prisma.CampaignUpdateManyWithoutCampaignCategoryNestedInput
 }
 
 export type CampaignCategoryUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutCampaignCategoryNestedInput
 }
 
 export type CampaignCategoryCreateManyInput = {
   id?: string
   name: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type CampaignCategoryUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CampaignCategoryUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CampaignCategoryNullableScalarRelationFilter = {
@@ -239,16 +277,22 @@ export type CampaignCategoryNullableScalarRelationFilter = {
 export type CampaignCategoryCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type CampaignCategoryMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type CampaignCategoryMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type CampaignCategoryCreateNestedOneWithoutCampaignsInput = {
@@ -270,11 +314,15 @@ export type CampaignCategoryUpdateOneWithoutCampaignsNestedInput = {
 export type CampaignCategoryCreateWithoutCampaignsInput = {
   id?: string
   name: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type CampaignCategoryUncheckedCreateWithoutCampaignsInput = {
   id?: string
   name: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type CampaignCategoryCreateOrConnectWithoutCampaignsInput = {
@@ -296,11 +344,15 @@ export type CampaignCategoryUpdateToOneWithWhereWithoutCampaignsInput = {
 export type CampaignCategoryUpdateWithoutCampaignsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CampaignCategoryUncheckedUpdateWithoutCampaignsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -337,6 +389,8 @@ export type CampaignCategoryCountOutputTypeCountCampaignsArgs<ExtArgs extends ru
 export type CampaignCategorySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   campaigns?: boolean | Prisma.CampaignCategory$campaignsArgs<ExtArgs>
   _count?: boolean | Prisma.CampaignCategoryCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["campaignCategory"]>
@@ -344,19 +398,25 @@ export type CampaignCategorySelect<ExtArgs extends runtime.Types.Extensions.Inte
 export type CampaignCategorySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["campaignCategory"]>
 
 export type CampaignCategorySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["campaignCategory"]>
 
 export type CampaignCategorySelectScalar = {
   id?: boolean
   name?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type CampaignCategoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name", ExtArgs["result"]["campaignCategory"]>
+export type CampaignCategoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["campaignCategory"]>
 export type CampaignCategoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   campaigns?: boolean | Prisma.CampaignCategory$campaignsArgs<ExtArgs>
   _count?: boolean | Prisma.CampaignCategoryCountOutputTypeDefaultArgs<ExtArgs>
@@ -372,6 +432,8 @@ export type $CampaignCategoryPayload<ExtArgs extends runtime.Types.Extensions.In
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["campaignCategory"]>
   composites: {}
 }
@@ -798,6 +860,8 @@ export interface Prisma__CampaignCategoryClient<T, Null = never, ExtArgs extends
 export interface CampaignCategoryFieldRefs {
   readonly id: Prisma.FieldRef<"CampaignCategory", 'String'>
   readonly name: Prisma.FieldRef<"CampaignCategory", 'String'>
+  readonly createdAt: Prisma.FieldRef<"CampaignCategory", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"CampaignCategory", 'DateTime'>
 }
     
 

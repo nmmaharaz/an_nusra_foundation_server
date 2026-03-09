@@ -1,7 +1,18 @@
 import { Router } from "express";
+import validationRequest from "../../utils/validationRequest";
+import { CampaignCategoriesValidation } from "./campaign-categories.validation";
+import { CampaignCategoriesController } from "./campaign-categories.controller";
 
 const router = Router()
 
-router.post("/")
+router.post("/", validationRequest(CampaignCategoriesValidation.createCampaignCategoriesZodSchema), CampaignCategoriesController.createCampaignCategories)
 
-export const CompaignCategoriesRoute = router
+router.get("/", CampaignCategoriesController.getAllCampaignCategories)
+
+router.get("/:id", CampaignCategoriesController.getSingleCampaignCategories)
+
+router.patch("/:id",  validationRequest(CampaignCategoriesValidation.updateCampaignCategoriesZodSchema), CampaignCategoriesController.updateCampaignCategories)
+
+router.delete("/:id", CampaignCategoriesController.deleteCampaignCategories)
+
+export const CampaignCategoriesRoute = router

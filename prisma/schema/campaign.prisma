@@ -18,8 +18,11 @@ model Campaign {
 }
 
 model CampaignCategory {
-    id        String     @id @default(uuid())
+    id        String   @id @default(uuid())
     name      String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
     campaigns Campaign[]
 }
 

@@ -4,6 +4,8 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "reset": "prisma migrate reset",
+    "db": "prisma studio",
     "dev": "tsx watch src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "migrate": "yarn prisma migrate dev --schema=./prisma/schema",
