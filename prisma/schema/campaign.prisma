@@ -2,18 +2,20 @@ model Campaign {
     id           String    @id @default(uuid())
     title        String
     description  String?
-    goalAmount   Float
-    raisedAmount Float     @default(0)
+    goalAmount   Float?
+    raisedAmount Float?    @default(0)
     startDate    DateTime
     endDate      DateTime?
     categoryId   String?
+    createdAt    DateTime  @default(now())
+    updatedAt    DateTime  @updatedAt
 
     donations          Donation[]
     recurringDonations RecurringDonation[]
     updates            CampaignUpdate[]
     media              CampaignMedia[]
-    campaignCategory   CampaignCategory?   @relation(fields: [campaignCategoryId], references: [id])
-    campaignCategoryId String?
+    campaignCategory   CampaignCategory?   @relation(fields: [categoryId], references: [id])
+    // campaignCategoryId String?
     impactReports      ImpactReport[]
 }
 
@@ -37,10 +39,10 @@ model CampaignUpdate {
 }
 
 model CampaignMedia {
-    id         String @id @default(uuid())
+    id         String            @id @default(uuid())
     campaignId String
     fileUrl    String
-    type       String
+    type       CampaignMediaType @default(image)
 
     campaign Campaign @relation(fields: [campaignId], references: [id])
 }

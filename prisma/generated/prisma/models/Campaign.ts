@@ -45,7 +45,8 @@ export type CampaignMinAggregateOutputType = {
   startDate: Date | null
   endDate: Date | null
   categoryId: string | null
-  campaignCategoryId: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type CampaignMaxAggregateOutputType = {
@@ -57,7 +58,8 @@ export type CampaignMaxAggregateOutputType = {
   startDate: Date | null
   endDate: Date | null
   categoryId: string | null
-  campaignCategoryId: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type CampaignCountAggregateOutputType = {
@@ -69,7 +71,8 @@ export type CampaignCountAggregateOutputType = {
   startDate: number
   endDate: number
   categoryId: number
-  campaignCategoryId: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -93,7 +96,8 @@ export type CampaignMinAggregateInputType = {
   startDate?: true
   endDate?: true
   categoryId?: true
-  campaignCategoryId?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type CampaignMaxAggregateInputType = {
@@ -105,7 +109,8 @@ export type CampaignMaxAggregateInputType = {
   startDate?: true
   endDate?: true
   categoryId?: true
-  campaignCategoryId?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type CampaignCountAggregateInputType = {
@@ -117,7 +122,8 @@ export type CampaignCountAggregateInputType = {
   startDate?: true
   endDate?: true
   categoryId?: true
-  campaignCategoryId?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -211,12 +217,13 @@ export type CampaignGroupByOutputType = {
   id: string
   title: string
   description: string | null
-  goalAmount: number
-  raisedAmount: number
+  goalAmount: number | null
+  raisedAmount: number | null
   startDate: Date
   endDate: Date | null
   categoryId: string | null
-  campaignCategoryId: string | null
+  createdAt: Date
+  updatedAt: Date
   _count: CampaignCountAggregateOutputType | null
   _avg: CampaignAvgAggregateOutputType | null
   _sum: CampaignSumAggregateOutputType | null
@@ -246,12 +253,13 @@ export type CampaignWhereInput = {
   id?: Prisma.StringFilter<"Campaign"> | string
   title?: Prisma.StringFilter<"Campaign"> | string
   description?: Prisma.StringNullableFilter<"Campaign"> | string | null
-  goalAmount?: Prisma.FloatFilter<"Campaign"> | number
-  raisedAmount?: Prisma.FloatFilter<"Campaign"> | number
+  goalAmount?: Prisma.FloatNullableFilter<"Campaign"> | number | null
+  raisedAmount?: Prisma.FloatNullableFilter<"Campaign"> | number | null
   startDate?: Prisma.DateTimeFilter<"Campaign"> | Date | string
   endDate?: Prisma.DateTimeNullableFilter<"Campaign"> | Date | string | null
   categoryId?: Prisma.StringNullableFilter<"Campaign"> | string | null
-  campaignCategoryId?: Prisma.StringNullableFilter<"Campaign"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"Campaign"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Campaign"> | Date | string
   donations?: Prisma.DonationListRelationFilter
   recurringDonations?: Prisma.RecurringDonationListRelationFilter
   updates?: Prisma.CampaignUpdateListRelationFilter
@@ -264,12 +272,13 @@ export type CampaignOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
-  goalAmount?: Prisma.SortOrder
-  raisedAmount?: Prisma.SortOrder
+  goalAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  raisedAmount?: Prisma.SortOrderInput | Prisma.SortOrder
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrderInput | Prisma.SortOrder
   categoryId?: Prisma.SortOrderInput | Prisma.SortOrder
-  campaignCategoryId?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   donations?: Prisma.DonationOrderByRelationAggregateInput
   recurringDonations?: Prisma.RecurringDonationOrderByRelationAggregateInput
   updates?: Prisma.CampaignUpdateOrderByRelationAggregateInput
@@ -285,12 +294,13 @@ export type CampaignWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.CampaignWhereInput | Prisma.CampaignWhereInput[]
   title?: Prisma.StringFilter<"Campaign"> | string
   description?: Prisma.StringNullableFilter<"Campaign"> | string | null
-  goalAmount?: Prisma.FloatFilter<"Campaign"> | number
-  raisedAmount?: Prisma.FloatFilter<"Campaign"> | number
+  goalAmount?: Prisma.FloatNullableFilter<"Campaign"> | number | null
+  raisedAmount?: Prisma.FloatNullableFilter<"Campaign"> | number | null
   startDate?: Prisma.DateTimeFilter<"Campaign"> | Date | string
   endDate?: Prisma.DateTimeNullableFilter<"Campaign"> | Date | string | null
   categoryId?: Prisma.StringNullableFilter<"Campaign"> | string | null
-  campaignCategoryId?: Prisma.StringNullableFilter<"Campaign"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"Campaign"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Campaign"> | Date | string
   donations?: Prisma.DonationListRelationFilter
   recurringDonations?: Prisma.RecurringDonationListRelationFilter
   updates?: Prisma.CampaignUpdateListRelationFilter
@@ -303,12 +313,13 @@ export type CampaignOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
-  goalAmount?: Prisma.SortOrder
-  raisedAmount?: Prisma.SortOrder
+  goalAmount?: Prisma.SortOrderInput | Prisma.SortOrder
+  raisedAmount?: Prisma.SortOrderInput | Prisma.SortOrder
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrderInput | Prisma.SortOrder
   categoryId?: Prisma.SortOrderInput | Prisma.SortOrder
-  campaignCategoryId?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.CampaignCountOrderByAggregateInput
   _avg?: Prisma.CampaignAvgOrderByAggregateInput
   _max?: Prisma.CampaignMaxOrderByAggregateInput
@@ -323,23 +334,25 @@ export type CampaignScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Campaign"> | string
   title?: Prisma.StringWithAggregatesFilter<"Campaign"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"Campaign"> | string | null
-  goalAmount?: Prisma.FloatWithAggregatesFilter<"Campaign"> | number
-  raisedAmount?: Prisma.FloatWithAggregatesFilter<"Campaign"> | number
+  goalAmount?: Prisma.FloatNullableWithAggregatesFilter<"Campaign"> | number | null
+  raisedAmount?: Prisma.FloatNullableWithAggregatesFilter<"Campaign"> | number | null
   startDate?: Prisma.DateTimeWithAggregatesFilter<"Campaign"> | Date | string
   endDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Campaign"> | Date | string | null
   categoryId?: Prisma.StringNullableWithAggregatesFilter<"Campaign"> | string | null
-  campaignCategoryId?: Prisma.StringNullableWithAggregatesFilter<"Campaign"> | string | null
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Campaign"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Campaign"> | Date | string
 }
 
 export type CampaignCreateInput = {
   id?: string
   title: string
   description?: string | null
-  goalAmount: number
-  raisedAmount?: number
+  goalAmount?: number | null
+  raisedAmount?: number | null
   startDate: Date | string
   endDate?: Date | string | null
-  categoryId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   donations?: Prisma.DonationCreateNestedManyWithoutCampaignInput
   recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutCampaignInput
   updates?: Prisma.CampaignUpdateCreateNestedManyWithoutCampaignInput
@@ -352,12 +365,13 @@ export type CampaignUncheckedCreateInput = {
   id?: string
   title: string
   description?: string | null
-  goalAmount: number
-  raisedAmount?: number
+  goalAmount?: number | null
+  raisedAmount?: number | null
   startDate: Date | string
   endDate?: Date | string | null
   categoryId?: string | null
-  campaignCategoryId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   donations?: Prisma.DonationUncheckedCreateNestedManyWithoutCampaignInput
   recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutCampaignInput
   updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutCampaignInput
@@ -369,11 +383,12 @@ export type CampaignUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  goalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  raisedAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  goalAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  raisedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   donations?: Prisma.DonationUpdateManyWithoutCampaignNestedInput
   recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutCampaignNestedInput
   updates?: Prisma.CampaignUpdateUpdateManyWithoutCampaignNestedInput
@@ -386,12 +401,13 @@ export type CampaignUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  goalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  raisedAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  goalAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  raisedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  campaignCategoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   donations?: Prisma.DonationUncheckedUpdateManyWithoutCampaignNestedInput
   recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutCampaignNestedInput
   updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutCampaignNestedInput
@@ -403,35 +419,38 @@ export type CampaignCreateManyInput = {
   id?: string
   title: string
   description?: string | null
-  goalAmount: number
-  raisedAmount?: number
+  goalAmount?: number | null
+  raisedAmount?: number | null
   startDate: Date | string
   endDate?: Date | string | null
   categoryId?: string | null
-  campaignCategoryId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type CampaignUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  goalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  raisedAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  goalAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  raisedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CampaignUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  goalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  raisedAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  goalAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  raisedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  campaignCategoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type CampaignCountOrderByAggregateInput = {
@@ -443,7 +462,8 @@ export type CampaignCountOrderByAggregateInput = {
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
-  campaignCategoryId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type CampaignAvgOrderByAggregateInput = {
@@ -460,7 +480,8 @@ export type CampaignMaxOrderByAggregateInput = {
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
-  campaignCategoryId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type CampaignMinOrderByAggregateInput = {
@@ -472,7 +493,8 @@ export type CampaignMinOrderByAggregateInput = {
   startDate?: Prisma.SortOrder
   endDate?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
-  campaignCategoryId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type CampaignSumOrderByAggregateInput = {
@@ -508,8 +530,8 @@ export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
 }
 
-export type FloatFieldUpdateOperationsInput = {
-  set?: number
+export type NullableFloatFieldUpdateOperationsInput = {
+  set?: number | null
   increment?: number
   decrement?: number
   multiply?: number
@@ -644,11 +666,12 @@ export type CampaignCreateWithoutCampaignCategoryInput = {
   id?: string
   title: string
   description?: string | null
-  goalAmount: number
-  raisedAmount?: number
+  goalAmount?: number | null
+  raisedAmount?: number | null
   startDate: Date | string
   endDate?: Date | string | null
-  categoryId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   donations?: Prisma.DonationCreateNestedManyWithoutCampaignInput
   recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutCampaignInput
   updates?: Prisma.CampaignUpdateCreateNestedManyWithoutCampaignInput
@@ -660,11 +683,12 @@ export type CampaignUncheckedCreateWithoutCampaignCategoryInput = {
   id?: string
   title: string
   description?: string | null
-  goalAmount: number
-  raisedAmount?: number
+  goalAmount?: number | null
+  raisedAmount?: number | null
   startDate: Date | string
   endDate?: Date | string | null
-  categoryId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   donations?: Prisma.DonationUncheckedCreateNestedManyWithoutCampaignInput
   recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutCampaignInput
   updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutCampaignInput
@@ -705,23 +729,25 @@ export type CampaignScalarWhereInput = {
   id?: Prisma.StringFilter<"Campaign"> | string
   title?: Prisma.StringFilter<"Campaign"> | string
   description?: Prisma.StringNullableFilter<"Campaign"> | string | null
-  goalAmount?: Prisma.FloatFilter<"Campaign"> | number
-  raisedAmount?: Prisma.FloatFilter<"Campaign"> | number
+  goalAmount?: Prisma.FloatNullableFilter<"Campaign"> | number | null
+  raisedAmount?: Prisma.FloatNullableFilter<"Campaign"> | number | null
   startDate?: Prisma.DateTimeFilter<"Campaign"> | Date | string
   endDate?: Prisma.DateTimeNullableFilter<"Campaign"> | Date | string | null
   categoryId?: Prisma.StringNullableFilter<"Campaign"> | string | null
-  campaignCategoryId?: Prisma.StringNullableFilter<"Campaign"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"Campaign"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Campaign"> | Date | string
 }
 
 export type CampaignCreateWithoutUpdatesInput = {
   id?: string
   title: string
   description?: string | null
-  goalAmount: number
-  raisedAmount?: number
+  goalAmount?: number | null
+  raisedAmount?: number | null
   startDate: Date | string
   endDate?: Date | string | null
-  categoryId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   donations?: Prisma.DonationCreateNestedManyWithoutCampaignInput
   recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutCampaignInput
   media?: Prisma.CampaignMediaCreateNestedManyWithoutCampaignInput
@@ -733,12 +759,13 @@ export type CampaignUncheckedCreateWithoutUpdatesInput = {
   id?: string
   title: string
   description?: string | null
-  goalAmount: number
-  raisedAmount?: number
+  goalAmount?: number | null
+  raisedAmount?: number | null
   startDate: Date | string
   endDate?: Date | string | null
   categoryId?: string | null
-  campaignCategoryId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   donations?: Prisma.DonationUncheckedCreateNestedManyWithoutCampaignInput
   recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutCampaignInput
   media?: Prisma.CampaignMediaUncheckedCreateNestedManyWithoutCampaignInput
@@ -765,11 +792,12 @@ export type CampaignUpdateWithoutUpdatesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  goalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  raisedAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  goalAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  raisedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   donations?: Prisma.DonationUpdateManyWithoutCampaignNestedInput
   recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutCampaignNestedInput
   media?: Prisma.CampaignMediaUpdateManyWithoutCampaignNestedInput
@@ -781,12 +809,13 @@ export type CampaignUncheckedUpdateWithoutUpdatesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  goalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  raisedAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  goalAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  raisedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  campaignCategoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   donations?: Prisma.DonationUncheckedUpdateManyWithoutCampaignNestedInput
   recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutCampaignNestedInput
   media?: Prisma.CampaignMediaUncheckedUpdateManyWithoutCampaignNestedInput
@@ -797,11 +826,12 @@ export type CampaignCreateWithoutMediaInput = {
   id?: string
   title: string
   description?: string | null
-  goalAmount: number
-  raisedAmount?: number
+  goalAmount?: number | null
+  raisedAmount?: number | null
   startDate: Date | string
   endDate?: Date | string | null
-  categoryId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   donations?: Prisma.DonationCreateNestedManyWithoutCampaignInput
   recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutCampaignInput
   updates?: Prisma.CampaignUpdateCreateNestedManyWithoutCampaignInput
@@ -813,12 +843,13 @@ export type CampaignUncheckedCreateWithoutMediaInput = {
   id?: string
   title: string
   description?: string | null
-  goalAmount: number
-  raisedAmount?: number
+  goalAmount?: number | null
+  raisedAmount?: number | null
   startDate: Date | string
   endDate?: Date | string | null
   categoryId?: string | null
-  campaignCategoryId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   donations?: Prisma.DonationUncheckedCreateNestedManyWithoutCampaignInput
   recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutCampaignInput
   updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutCampaignInput
@@ -845,11 +876,12 @@ export type CampaignUpdateWithoutMediaInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  goalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  raisedAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  goalAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  raisedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   donations?: Prisma.DonationUpdateManyWithoutCampaignNestedInput
   recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutCampaignNestedInput
   updates?: Prisma.CampaignUpdateUpdateManyWithoutCampaignNestedInput
@@ -861,12 +893,13 @@ export type CampaignUncheckedUpdateWithoutMediaInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  goalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  raisedAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  goalAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  raisedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  campaignCategoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   donations?: Prisma.DonationUncheckedUpdateManyWithoutCampaignNestedInput
   recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutCampaignNestedInput
   updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutCampaignNestedInput
@@ -877,11 +910,12 @@ export type CampaignCreateWithoutDonationsInput = {
   id?: string
   title: string
   description?: string | null
-  goalAmount: number
-  raisedAmount?: number
+  goalAmount?: number | null
+  raisedAmount?: number | null
   startDate: Date | string
   endDate?: Date | string | null
-  categoryId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutCampaignInput
   updates?: Prisma.CampaignUpdateCreateNestedManyWithoutCampaignInput
   media?: Prisma.CampaignMediaCreateNestedManyWithoutCampaignInput
@@ -893,12 +927,13 @@ export type CampaignUncheckedCreateWithoutDonationsInput = {
   id?: string
   title: string
   description?: string | null
-  goalAmount: number
-  raisedAmount?: number
+  goalAmount?: number | null
+  raisedAmount?: number | null
   startDate: Date | string
   endDate?: Date | string | null
   categoryId?: string | null
-  campaignCategoryId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutCampaignInput
   updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutCampaignInput
   media?: Prisma.CampaignMediaUncheckedCreateNestedManyWithoutCampaignInput
@@ -925,11 +960,12 @@ export type CampaignUpdateWithoutDonationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  goalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  raisedAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  goalAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  raisedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutCampaignNestedInput
   updates?: Prisma.CampaignUpdateUpdateManyWithoutCampaignNestedInput
   media?: Prisma.CampaignMediaUpdateManyWithoutCampaignNestedInput
@@ -941,12 +977,13 @@ export type CampaignUncheckedUpdateWithoutDonationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  goalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  raisedAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  goalAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  raisedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  campaignCategoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutCampaignNestedInput
   updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutCampaignNestedInput
   media?: Prisma.CampaignMediaUncheckedUpdateManyWithoutCampaignNestedInput
@@ -957,11 +994,12 @@ export type CampaignCreateWithoutRecurringDonationsInput = {
   id?: string
   title: string
   description?: string | null
-  goalAmount: number
-  raisedAmount?: number
+  goalAmount?: number | null
+  raisedAmount?: number | null
   startDate: Date | string
   endDate?: Date | string | null
-  categoryId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   donations?: Prisma.DonationCreateNestedManyWithoutCampaignInput
   updates?: Prisma.CampaignUpdateCreateNestedManyWithoutCampaignInput
   media?: Prisma.CampaignMediaCreateNestedManyWithoutCampaignInput
@@ -973,12 +1011,13 @@ export type CampaignUncheckedCreateWithoutRecurringDonationsInput = {
   id?: string
   title: string
   description?: string | null
-  goalAmount: number
-  raisedAmount?: number
+  goalAmount?: number | null
+  raisedAmount?: number | null
   startDate: Date | string
   endDate?: Date | string | null
   categoryId?: string | null
-  campaignCategoryId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   donations?: Prisma.DonationUncheckedCreateNestedManyWithoutCampaignInput
   updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutCampaignInput
   media?: Prisma.CampaignMediaUncheckedCreateNestedManyWithoutCampaignInput
@@ -1005,11 +1044,12 @@ export type CampaignUpdateWithoutRecurringDonationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  goalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  raisedAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  goalAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  raisedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   donations?: Prisma.DonationUpdateManyWithoutCampaignNestedInput
   updates?: Prisma.CampaignUpdateUpdateManyWithoutCampaignNestedInput
   media?: Prisma.CampaignMediaUpdateManyWithoutCampaignNestedInput
@@ -1021,12 +1061,13 @@ export type CampaignUncheckedUpdateWithoutRecurringDonationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  goalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  raisedAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  goalAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  raisedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  campaignCategoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   donations?: Prisma.DonationUncheckedUpdateManyWithoutCampaignNestedInput
   updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutCampaignNestedInput
   media?: Prisma.CampaignMediaUncheckedUpdateManyWithoutCampaignNestedInput
@@ -1037,11 +1078,12 @@ export type CampaignCreateWithoutImpactReportsInput = {
   id?: string
   title: string
   description?: string | null
-  goalAmount: number
-  raisedAmount?: number
+  goalAmount?: number | null
+  raisedAmount?: number | null
   startDate: Date | string
   endDate?: Date | string | null
-  categoryId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   donations?: Prisma.DonationCreateNestedManyWithoutCampaignInput
   recurringDonations?: Prisma.RecurringDonationCreateNestedManyWithoutCampaignInput
   updates?: Prisma.CampaignUpdateCreateNestedManyWithoutCampaignInput
@@ -1053,12 +1095,13 @@ export type CampaignUncheckedCreateWithoutImpactReportsInput = {
   id?: string
   title: string
   description?: string | null
-  goalAmount: number
-  raisedAmount?: number
+  goalAmount?: number | null
+  raisedAmount?: number | null
   startDate: Date | string
   endDate?: Date | string | null
   categoryId?: string | null
-  campaignCategoryId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
   donations?: Prisma.DonationUncheckedCreateNestedManyWithoutCampaignInput
   recurringDonations?: Prisma.RecurringDonationUncheckedCreateNestedManyWithoutCampaignInput
   updates?: Prisma.CampaignUpdateUncheckedCreateNestedManyWithoutCampaignInput
@@ -1085,11 +1128,12 @@ export type CampaignUpdateWithoutImpactReportsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  goalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  raisedAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  goalAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  raisedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   donations?: Prisma.DonationUpdateManyWithoutCampaignNestedInput
   recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutCampaignNestedInput
   updates?: Prisma.CampaignUpdateUpdateManyWithoutCampaignNestedInput
@@ -1101,12 +1145,13 @@ export type CampaignUncheckedUpdateWithoutImpactReportsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  goalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  raisedAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  goalAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  raisedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  campaignCategoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   donations?: Prisma.DonationUncheckedUpdateManyWithoutCampaignNestedInput
   recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutCampaignNestedInput
   updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutCampaignNestedInput
@@ -1117,22 +1162,24 @@ export type CampaignCreateManyCampaignCategoryInput = {
   id?: string
   title: string
   description?: string | null
-  goalAmount: number
-  raisedAmount?: number
+  goalAmount?: number | null
+  raisedAmount?: number | null
   startDate: Date | string
   endDate?: Date | string | null
-  categoryId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type CampaignUpdateWithoutCampaignCategoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  goalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  raisedAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  goalAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  raisedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   donations?: Prisma.DonationUpdateManyWithoutCampaignNestedInput
   recurringDonations?: Prisma.RecurringDonationUpdateManyWithoutCampaignNestedInput
   updates?: Prisma.CampaignUpdateUpdateManyWithoutCampaignNestedInput
@@ -1144,11 +1191,12 @@ export type CampaignUncheckedUpdateWithoutCampaignCategoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  goalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  raisedAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  goalAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  raisedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   donations?: Prisma.DonationUncheckedUpdateManyWithoutCampaignNestedInput
   recurringDonations?: Prisma.RecurringDonationUncheckedUpdateManyWithoutCampaignNestedInput
   updates?: Prisma.CampaignUpdateUncheckedUpdateManyWithoutCampaignNestedInput
@@ -1160,11 +1208,12 @@ export type CampaignUncheckedUpdateManyWithoutCampaignCategoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  goalAmount?: Prisma.FloatFieldUpdateOperationsInput | number
-  raisedAmount?: Prisma.FloatFieldUpdateOperationsInput | number
+  goalAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  raisedAmount?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -1243,7 +1292,8 @@ export type CampaignSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   startDate?: boolean
   endDate?: boolean
   categoryId?: boolean
-  campaignCategoryId?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   donations?: boolean | Prisma.Campaign$donationsArgs<ExtArgs>
   recurringDonations?: boolean | Prisma.Campaign$recurringDonationsArgs<ExtArgs>
   updates?: boolean | Prisma.Campaign$updatesArgs<ExtArgs>
@@ -1262,7 +1312,8 @@ export type CampaignSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   startDate?: boolean
   endDate?: boolean
   categoryId?: boolean
-  campaignCategoryId?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   campaignCategory?: boolean | Prisma.Campaign$campaignCategoryArgs<ExtArgs>
 }, ExtArgs["result"]["campaign"]>
 
@@ -1275,7 +1326,8 @@ export type CampaignSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   startDate?: boolean
   endDate?: boolean
   categoryId?: boolean
-  campaignCategoryId?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   campaignCategory?: boolean | Prisma.Campaign$campaignCategoryArgs<ExtArgs>
 }, ExtArgs["result"]["campaign"]>
 
@@ -1288,10 +1340,11 @@ export type CampaignSelectScalar = {
   startDate?: boolean
   endDate?: boolean
   categoryId?: boolean
-  campaignCategoryId?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type CampaignOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "goalAmount" | "raisedAmount" | "startDate" | "endDate" | "categoryId" | "campaignCategoryId", ExtArgs["result"]["campaign"]>
+export type CampaignOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "goalAmount" | "raisedAmount" | "startDate" | "endDate" | "categoryId" | "createdAt" | "updatedAt", ExtArgs["result"]["campaign"]>
 export type CampaignInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   donations?: boolean | Prisma.Campaign$donationsArgs<ExtArgs>
   recurringDonations?: boolean | Prisma.Campaign$recurringDonationsArgs<ExtArgs>
@@ -1322,12 +1375,13 @@ export type $CampaignPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     id: string
     title: string
     description: string | null
-    goalAmount: number
-    raisedAmount: number
+    goalAmount: number | null
+    raisedAmount: number | null
     startDate: Date
     endDate: Date | null
     categoryId: string | null
-    campaignCategoryId: string | null
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["campaign"]>
   composites: {}
 }
@@ -1765,7 +1819,8 @@ export interface CampaignFieldRefs {
   readonly startDate: Prisma.FieldRef<"Campaign", 'DateTime'>
   readonly endDate: Prisma.FieldRef<"Campaign", 'DateTime'>
   readonly categoryId: Prisma.FieldRef<"Campaign", 'String'>
-  readonly campaignCategoryId: Prisma.FieldRef<"Campaign", 'String'>
+  readonly createdAt: Prisma.FieldRef<"Campaign", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"Campaign", 'DateTime'>
 }
     
 

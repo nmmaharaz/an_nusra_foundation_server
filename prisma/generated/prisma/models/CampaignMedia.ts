@@ -28,14 +28,14 @@ export type CampaignMediaMinAggregateOutputType = {
   id: string | null
   campaignId: string | null
   fileUrl: string | null
-  type: string | null
+  type: $Enums.CampaignMediaType | null
 }
 
 export type CampaignMediaMaxAggregateOutputType = {
   id: string | null
   campaignId: string | null
   fileUrl: string | null
-  type: string | null
+  type: $Enums.CampaignMediaType | null
 }
 
 export type CampaignMediaCountAggregateOutputType = {
@@ -145,7 +145,7 @@ export type CampaignMediaGroupByOutputType = {
   id: string
   campaignId: string
   fileUrl: string
-  type: string
+  type: $Enums.CampaignMediaType
   _count: CampaignMediaCountAggregateOutputType | null
   _min: CampaignMediaMinAggregateOutputType | null
   _max: CampaignMediaMaxAggregateOutputType | null
@@ -173,7 +173,7 @@ export type CampaignMediaWhereInput = {
   id?: Prisma.StringFilter<"CampaignMedia"> | string
   campaignId?: Prisma.StringFilter<"CampaignMedia"> | string
   fileUrl?: Prisma.StringFilter<"CampaignMedia"> | string
-  type?: Prisma.StringFilter<"CampaignMedia"> | string
+  type?: Prisma.EnumCampaignMediaTypeFilter<"CampaignMedia"> | $Enums.CampaignMediaType
   campaign?: Prisma.XOR<Prisma.CampaignScalarRelationFilter, Prisma.CampaignWhereInput>
 }
 
@@ -192,7 +192,7 @@ export type CampaignMediaWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.CampaignMediaWhereInput | Prisma.CampaignMediaWhereInput[]
   campaignId?: Prisma.StringFilter<"CampaignMedia"> | string
   fileUrl?: Prisma.StringFilter<"CampaignMedia"> | string
-  type?: Prisma.StringFilter<"CampaignMedia"> | string
+  type?: Prisma.EnumCampaignMediaTypeFilter<"CampaignMedia"> | $Enums.CampaignMediaType
   campaign?: Prisma.XOR<Prisma.CampaignScalarRelationFilter, Prisma.CampaignWhereInput>
 }, "id">
 
@@ -213,13 +213,13 @@ export type CampaignMediaScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"CampaignMedia"> | string
   campaignId?: Prisma.StringWithAggregatesFilter<"CampaignMedia"> | string
   fileUrl?: Prisma.StringWithAggregatesFilter<"CampaignMedia"> | string
-  type?: Prisma.StringWithAggregatesFilter<"CampaignMedia"> | string
+  type?: Prisma.EnumCampaignMediaTypeWithAggregatesFilter<"CampaignMedia"> | $Enums.CampaignMediaType
 }
 
 export type CampaignMediaCreateInput = {
   id?: string
   fileUrl: string
-  type: string
+  type?: $Enums.CampaignMediaType
   campaign: Prisma.CampaignCreateNestedOneWithoutMediaInput
 }
 
@@ -227,13 +227,13 @@ export type CampaignMediaUncheckedCreateInput = {
   id?: string
   campaignId: string
   fileUrl: string
-  type: string
+  type?: $Enums.CampaignMediaType
 }
 
 export type CampaignMediaUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCampaignMediaTypeFieldUpdateOperationsInput | $Enums.CampaignMediaType
   campaign?: Prisma.CampaignUpdateOneRequiredWithoutMediaNestedInput
 }
 
@@ -241,27 +241,27 @@ export type CampaignMediaUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   campaignId?: Prisma.StringFieldUpdateOperationsInput | string
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCampaignMediaTypeFieldUpdateOperationsInput | $Enums.CampaignMediaType
 }
 
 export type CampaignMediaCreateManyInput = {
   id?: string
   campaignId: string
   fileUrl: string
-  type: string
+  type?: $Enums.CampaignMediaType
 }
 
 export type CampaignMediaUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCampaignMediaTypeFieldUpdateOperationsInput | $Enums.CampaignMediaType
 }
 
 export type CampaignMediaUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   campaignId?: Prisma.StringFieldUpdateOperationsInput | string
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCampaignMediaTypeFieldUpdateOperationsInput | $Enums.CampaignMediaType
 }
 
 export type CampaignMediaListRelationFilter = {
@@ -337,16 +337,20 @@ export type CampaignMediaUncheckedUpdateManyWithoutCampaignNestedInput = {
   deleteMany?: Prisma.CampaignMediaScalarWhereInput | Prisma.CampaignMediaScalarWhereInput[]
 }
 
+export type EnumCampaignMediaTypeFieldUpdateOperationsInput = {
+  set?: $Enums.CampaignMediaType
+}
+
 export type CampaignMediaCreateWithoutCampaignInput = {
   id?: string
   fileUrl: string
-  type: string
+  type?: $Enums.CampaignMediaType
 }
 
 export type CampaignMediaUncheckedCreateWithoutCampaignInput = {
   id?: string
   fileUrl: string
-  type: string
+  type?: $Enums.CampaignMediaType
 }
 
 export type CampaignMediaCreateOrConnectWithoutCampaignInput = {
@@ -382,31 +386,31 @@ export type CampaignMediaScalarWhereInput = {
   id?: Prisma.StringFilter<"CampaignMedia"> | string
   campaignId?: Prisma.StringFilter<"CampaignMedia"> | string
   fileUrl?: Prisma.StringFilter<"CampaignMedia"> | string
-  type?: Prisma.StringFilter<"CampaignMedia"> | string
+  type?: Prisma.EnumCampaignMediaTypeFilter<"CampaignMedia"> | $Enums.CampaignMediaType
 }
 
 export type CampaignMediaCreateManyCampaignInput = {
   id?: string
   fileUrl: string
-  type: string
+  type?: $Enums.CampaignMediaType
 }
 
 export type CampaignMediaUpdateWithoutCampaignInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCampaignMediaTypeFieldUpdateOperationsInput | $Enums.CampaignMediaType
 }
 
 export type CampaignMediaUncheckedUpdateWithoutCampaignInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCampaignMediaTypeFieldUpdateOperationsInput | $Enums.CampaignMediaType
 }
 
 export type CampaignMediaUncheckedUpdateManyWithoutCampaignInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumCampaignMediaTypeFieldUpdateOperationsInput | $Enums.CampaignMediaType
 }
 
 
@@ -462,7 +466,7 @@ export type $CampaignMediaPayload<ExtArgs extends runtime.Types.Extensions.Inter
     id: string
     campaignId: string
     fileUrl: string
-    type: string
+    type: $Enums.CampaignMediaType
   }, ExtArgs["result"]["campaignMedia"]>
   composites: {}
 }
@@ -890,7 +894,7 @@ export interface CampaignMediaFieldRefs {
   readonly id: Prisma.FieldRef<"CampaignMedia", 'String'>
   readonly campaignId: Prisma.FieldRef<"CampaignMedia", 'String'>
   readonly fileUrl: Prisma.FieldRef<"CampaignMedia", 'String'>
-  readonly type: Prisma.FieldRef<"CampaignMedia", 'String'>
+  readonly type: Prisma.FieldRef<"CampaignMedia", 'CampaignMediaType'>
 }
     
 

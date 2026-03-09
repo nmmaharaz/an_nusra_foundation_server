@@ -16,3 +16,11 @@ export const UserStatus = {
 } as const
 
 export type UserStatus = (typeof UserStatus)[keyof typeof UserStatus]
+
+
+export const CampaignMediaType = {
+  image: 'image',
+  video: 'video'
+} as const
+
+export type CampaignMediaType = (typeof CampaignMediaType)[keyof typeof CampaignMediaType]

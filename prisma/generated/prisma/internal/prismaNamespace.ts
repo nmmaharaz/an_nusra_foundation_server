@@ -3226,7 +3226,8 @@ export const CampaignScalarFieldEnum = {
   startDate: 'startDate',
   endDate: 'endDate',
   categoryId: 'categoryId',
-  campaignCategoryId: 'campaignCategoryId'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type CampaignScalarFieldEnum = (typeof CampaignScalarFieldEnum)[keyof typeof CampaignScalarFieldEnum]
@@ -3685,6 +3686,20 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'CampaignMediaType'
+ */
+export type EnumCampaignMediaTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CampaignMediaType'>
+    
+
+
+/**
+ * Reference to a field of type 'CampaignMediaType[]'
+ */
+export type ListEnumCampaignMediaTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CampaignMediaType[]'>
     
 
 

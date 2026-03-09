@@ -11,7 +11,7 @@ router.get("/", CampaignCategoriesController.getAllCampaignCategories)
 
 router.get("/:id", CampaignCategoriesController.getSingleCampaignCategories)
 
-router.patch("/:id",  validationRequest(CampaignCategoriesValidation.updateCampaignCategoriesZodSchema), CampaignCategoriesController.updateCampaignCategories)
+router.patch("/:id", validationRequest(CampaignCategoriesValidation.updateCampaignCategoriesZodSchema), CampaignCategoriesController.updateCampaignCategories)
 
 router.delete("/:id", CampaignCategoriesController.deleteCampaignCategories)
 

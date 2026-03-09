@@ -527,6 +527,14 @@ export type DonationUncheckedUpdateManyWithoutDonorNestedInput = {
   deleteMany?: Prisma.DonationScalarWhereInput | Prisma.DonationScalarWhereInput[]
 }
 
+export type FloatFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type DonationCreateNestedManyWithoutRecurringInput = {
   create?: Prisma.XOR<Prisma.DonationCreateWithoutRecurringInput, Prisma.DonationUncheckedCreateWithoutRecurringInput> | Prisma.DonationCreateWithoutRecurringInput[] | Prisma.DonationUncheckedCreateWithoutRecurringInput[]
   connectOrCreate?: Prisma.DonationCreateOrConnectWithoutRecurringInput | Prisma.DonationCreateOrConnectWithoutRecurringInput[]

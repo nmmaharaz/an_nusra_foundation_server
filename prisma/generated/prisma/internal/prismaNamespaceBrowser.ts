@@ -115,7 +115,8 @@ export const CampaignScalarFieldEnum = {
   startDate: 'startDate',
   endDate: 'endDate',
   categoryId: 'categoryId',
-  campaignCategoryId: 'campaignCategoryId'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type CampaignScalarFieldEnum = (typeof CampaignScalarFieldEnum)[keyof typeof CampaignScalarFieldEnum]

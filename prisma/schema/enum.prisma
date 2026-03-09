@@ -3,3 +3,8 @@ enum UserStatus {
     inactive
     blocked
 }
+
+enum CampaignMediaType {
+    image
+    video
+}
