@@ -53,7 +53,8 @@ const getAllCampaign = async (query: Record<string, string>) => {
         where,
         include: {
             campaignCategory: true,
-            media: true
+            media: true,
+            impactReports: true
         },
         skip,
         take: limitNumber,
@@ -76,7 +77,79 @@ const getAllCampaign = async (query: Record<string, string>) => {
     };
 }
 
+const getSingleCampaign = async (id: string) => {
+    return await prisma.campaign.findUnique({
+        where: {
+            id: id
+        },
+        include:{
+            campaignCategory: {
+                select: {
+                    name: true
+                }
+            },
+            media: true,
+            impactReports: true
+        },
+        
+    })
+}
+
+const updateCampaign = async (id: string, payload: Partial<Prisma.CampaignCreateInput>, file: string) => {
+    return await prisma.$transaction(async (tnx) => {
+        const campaign = await tnx.campaign.update({
+            where: {
+                id: id
+            },
+            data: payload
+        })
+
+        if (file) {
+            await tnx.campaignMedia.deleteMany({
+                where: {
+                    campaignId: id
+                }
+            })
+            await tnx.campaignMedia.create({
+                data: {
+                    fileUrl: file,
+                    campaignId: campaign.id
+                }
+            })
+        }
+
+        return await tnx.campaign.findUniqueOrThrow({
+            where: {
+                id
+            },
+            include:{
+                campaignCategory: true,
+                media: true
+            }
+        })
+    })
+}
+
+const deleteCampaign = async (id: string) => {
+     return await prisma.$transaction(async (tnx) => {
+        await tnx.campaignMedia.deleteMany({
+            where: {
+                campaignId: id
+            },
+        })
+
+        return await tnx.campaign.delete({
+            where: {
+                id
+            }
+        })
+    })
+}
+
 export const CampaignService = {
     createCampaign,
-    getAllCampaign
+    getAllCampaign,
+    getSingleCampaign,
+    updateCampaign,
+    deleteCampaign
 }
