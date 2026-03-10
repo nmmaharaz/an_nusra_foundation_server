@@ -67,3 +67,26 @@ export const updateCampaignZodSchema = z.object({
 
     categoryId: z.string().optional(),
 })
+
+// Campaign Update
+export const createCampaignUpdateZodSchema = z.object({
+    title: z
+        .string()
+        .min(3, "Title must be at least 3 characters")
+        .max(200, "Title too long"),
+
+    content: z
+        .string()
+        .max(5000, "content must be at least 3 characters")
+})
+
+export const updateCampaignUpdateZodSchema = z.object({
+    title: z
+        .string()
+        .min(3, "Title must be at least 3 characters")
+        .max(200, "Title too long").optional(),
+
+    content: z
+        .string()
+        .max(5000, "content must be at least 3 characters").optional()
+})

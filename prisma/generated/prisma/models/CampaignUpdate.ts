@@ -29,6 +29,7 @@ export type CampaignUpdateMinAggregateOutputType = {
   campaignId: string | null
   title: string | null
   content: string | null
+  image: string | null
   createdAt: Date | null
 }
 
@@ -37,6 +38,7 @@ export type CampaignUpdateMaxAggregateOutputType = {
   campaignId: string | null
   title: string | null
   content: string | null
+  image: string | null
   createdAt: Date | null
 }
 
@@ -45,6 +47,7 @@ export type CampaignUpdateCountAggregateOutputType = {
   campaignId: number
   title: number
   content: number
+  image: number
   createdAt: number
   _all: number
 }
@@ -55,6 +58,7 @@ export type CampaignUpdateMinAggregateInputType = {
   campaignId?: true
   title?: true
   content?: true
+  image?: true
   createdAt?: true
 }
 
@@ -63,6 +67,7 @@ export type CampaignUpdateMaxAggregateInputType = {
   campaignId?: true
   title?: true
   content?: true
+  image?: true
   createdAt?: true
 }
 
@@ -71,6 +76,7 @@ export type CampaignUpdateCountAggregateInputType = {
   campaignId?: true
   title?: true
   content?: true
+  image?: true
   createdAt?: true
   _all?: true
 }
@@ -152,6 +158,7 @@ export type CampaignUpdateGroupByOutputType = {
   campaignId: string
   title: string
   content: string
+  image: string | null
   createdAt: Date
   _count: CampaignUpdateCountAggregateOutputType | null
   _min: CampaignUpdateMinAggregateOutputType | null
@@ -181,6 +188,7 @@ export type CampaignUpdateWhereInput = {
   campaignId?: Prisma.StringFilter<"CampaignUpdate"> | string
   title?: Prisma.StringFilter<"CampaignUpdate"> | string
   content?: Prisma.StringFilter<"CampaignUpdate"> | string
+  image?: Prisma.StringNullableFilter<"CampaignUpdate"> | string | null
   createdAt?: Prisma.DateTimeFilter<"CampaignUpdate"> | Date | string
   campaign?: Prisma.XOR<Prisma.CampaignScalarRelationFilter, Prisma.CampaignWhereInput>
 }
@@ -190,6 +198,7 @@ export type CampaignUpdateOrderByWithRelationInput = {
   campaignId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  image?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   campaign?: Prisma.CampaignOrderByWithRelationInput
 }
@@ -202,6 +211,7 @@ export type CampaignUpdateWhereUniqueInput = Prisma.AtLeast<{
   campaignId?: Prisma.StringFilter<"CampaignUpdate"> | string
   title?: Prisma.StringFilter<"CampaignUpdate"> | string
   content?: Prisma.StringFilter<"CampaignUpdate"> | string
+  image?: Prisma.StringNullableFilter<"CampaignUpdate"> | string | null
   createdAt?: Prisma.DateTimeFilter<"CampaignUpdate"> | Date | string
   campaign?: Prisma.XOR<Prisma.CampaignScalarRelationFilter, Prisma.CampaignWhereInput>
 }, "id">
@@ -211,6 +221,7 @@ export type CampaignUpdateOrderByWithAggregationInput = {
   campaignId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  image?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.CampaignUpdateCountOrderByAggregateInput
   _max?: Prisma.CampaignUpdateMaxOrderByAggregateInput
@@ -225,6 +236,7 @@ export type CampaignUpdateScalarWhereWithAggregatesInput = {
   campaignId?: Prisma.StringWithAggregatesFilter<"CampaignUpdate"> | string
   title?: Prisma.StringWithAggregatesFilter<"CampaignUpdate"> | string
   content?: Prisma.StringWithAggregatesFilter<"CampaignUpdate"> | string
+  image?: Prisma.StringNullableWithAggregatesFilter<"CampaignUpdate"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CampaignUpdate"> | Date | string
 }
 
@@ -232,6 +244,7 @@ export type CampaignUpdateCreateInput = {
   id?: string
   title: string
   content: string
+  image?: string | null
   createdAt?: Date | string
   campaign: Prisma.CampaignCreateNestedOneWithoutUpdatesInput
 }
@@ -241,6 +254,7 @@ export type CampaignUpdateUncheckedCreateInput = {
   campaignId: string
   title: string
   content: string
+  image?: string | null
   createdAt?: Date | string
 }
 
@@ -248,6 +262,7 @@ export type CampaignUpdateUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   campaign?: Prisma.CampaignUpdateOneRequiredWithoutUpdatesNestedInput
 }
@@ -257,6 +272,7 @@ export type CampaignUpdateUncheckedUpdateInput = {
   campaignId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -265,6 +281,7 @@ export type CampaignUpdateCreateManyInput = {
   campaignId: string
   title: string
   content: string
+  image?: string | null
   createdAt?: Date | string
 }
 
@@ -272,6 +289,7 @@ export type CampaignUpdateUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -280,6 +298,7 @@ export type CampaignUpdateUncheckedUpdateManyInput = {
   campaignId?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -298,6 +317,7 @@ export type CampaignUpdateCountOrderByAggregateInput = {
   campaignId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  image?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -306,6 +326,7 @@ export type CampaignUpdateMaxOrderByAggregateInput = {
   campaignId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  image?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -314,6 +335,7 @@ export type CampaignUpdateMinOrderByAggregateInput = {
   campaignId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  image?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -363,6 +385,7 @@ export type CampaignUpdateCreateWithoutCampaignInput = {
   id?: string
   title: string
   content: string
+  image?: string | null
   createdAt?: Date | string
 }
 
@@ -370,6 +393,7 @@ export type CampaignUpdateUncheckedCreateWithoutCampaignInput = {
   id?: string
   title: string
   content: string
+  image?: string | null
   createdAt?: Date | string
 }
 
@@ -407,6 +431,7 @@ export type CampaignUpdateScalarWhereInput = {
   campaignId?: Prisma.StringFilter<"CampaignUpdate"> | string
   title?: Prisma.StringFilter<"CampaignUpdate"> | string
   content?: Prisma.StringFilter<"CampaignUpdate"> | string
+  image?: Prisma.StringNullableFilter<"CampaignUpdate"> | string | null
   createdAt?: Prisma.DateTimeFilter<"CampaignUpdate"> | Date | string
 }
 
@@ -414,6 +439,7 @@ export type CampaignUpdateCreateManyCampaignInput = {
   id?: string
   title: string
   content: string
+  image?: string | null
   createdAt?: Date | string
 }
 
@@ -421,6 +447,7 @@ export type CampaignUpdateUpdateWithoutCampaignInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -428,6 +455,7 @@ export type CampaignUpdateUncheckedUpdateWithoutCampaignInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -435,6 +463,7 @@ export type CampaignUpdateUncheckedUpdateManyWithoutCampaignInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -445,6 +474,7 @@ export type CampaignUpdateSelect<ExtArgs extends runtime.Types.Extensions.Intern
   campaignId?: boolean
   title?: boolean
   content?: boolean
+  image?: boolean
   createdAt?: boolean
   campaign?: boolean | Prisma.CampaignDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["campaignUpdate"]>
@@ -454,6 +484,7 @@ export type CampaignUpdateSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   campaignId?: boolean
   title?: boolean
   content?: boolean
+  image?: boolean
   createdAt?: boolean
   campaign?: boolean | Prisma.CampaignDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["campaignUpdate"]>
@@ -463,6 +494,7 @@ export type CampaignUpdateSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   campaignId?: boolean
   title?: boolean
   content?: boolean
+  image?: boolean
   createdAt?: boolean
   campaign?: boolean | Prisma.CampaignDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["campaignUpdate"]>
@@ -472,10 +504,11 @@ export type CampaignUpdateSelectScalar = {
   campaignId?: boolean
   title?: boolean
   content?: boolean
+  image?: boolean
   createdAt?: boolean
 }
 
-export type CampaignUpdateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "campaignId" | "title" | "content" | "createdAt", ExtArgs["result"]["campaignUpdate"]>
+export type CampaignUpdateOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "campaignId" | "title" | "content" | "image" | "createdAt", ExtArgs["result"]["campaignUpdate"]>
 export type CampaignUpdateInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   campaign?: boolean | Prisma.CampaignDefaultArgs<ExtArgs>
 }
@@ -496,6 +529,7 @@ export type $CampaignUpdatePayload<ExtArgs extends runtime.Types.Extensions.Inte
     campaignId: string
     title: string
     content: string
+    image: string | null
     createdAt: Date
   }, ExtArgs["result"]["campaignUpdate"]>
   composites: {}
@@ -925,6 +959,7 @@ export interface CampaignUpdateFieldRefs {
   readonly campaignId: Prisma.FieldRef<"CampaignUpdate", 'String'>
   readonly title: Prisma.FieldRef<"CampaignUpdate", 'String'>
   readonly content: Prisma.FieldRef<"CampaignUpdate", 'String'>
+  readonly image: Prisma.FieldRef<"CampaignUpdate", 'String'>
   readonly createdAt: Prisma.FieldRef<"CampaignUpdate", 'DateTime'>
 }
     

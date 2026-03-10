@@ -3248,6 +3248,7 @@ export const CampaignUpdateScalarFieldEnum = {
   campaignId: 'campaignId',
   title: 'title',
   content: 'content',
+  image: 'image',
   createdAt: 'createdAt'
 } as const
 
